@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Appointment\AppointmentRequest;
+use App\Http\Requests\Appointment\UpdateAppointmentRequest;
+use App\Http\Resources\Appointment\AppointmentResource;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,22 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('appointments.index');
+    }
+
+    public function filter(Request $request)
+    {
+        if (!auth()->user()->doctor) {
+            return Appointment::whereBetween('date', [$request->start, $request->end])
+                ->with('user:id,full_name')
+                ->get()
+          ;
+        }
+
+        return Appointment::whereBetween('date', [$request->start, $request->end])
+            ->where('user_id', auth()->user()->id)
+            ->get()
+          ;
     }
 
     /**
@@ -24,62 +42,84 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AppointmentRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $appointment = Appointment::create($validated);
+
+        //Update related incomes
+
+        return (new AppointmentResource($appointment))->additional([
+            'meta' => [
+                'success' => true,
+                'message' => 'Cita ha sido registrada.',
+            ],
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Appointment $appointment)
+    public function show(Request $request)
     {
-        //
+        $appointment = Appointment::findOrFail($request->id);
+
+        return (new AppointmentResource($appointment))->additional([
+            'meta' => [
+                'success' => true,
+                'message' => 'Cita ha sido cargada.',
+            ],
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
     public function edit(Appointment $appointment)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(UpdateAppointmentRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $appointment = Appointment::findOrFail($validated['id']);
+        $appointment->fill($validated);
+        $appointment->save();
+
+        return (new AppointmentResource($appointment))->additional([
+            'meta' => [
+                'success' => true,
+                'message' => 'Cita ha sido actualizada.',
+            ],
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(Request $request)
     {
-        //
+        $appointment = Appointment::findOrFail($request['id']);
+        $appointment->delete();
+
+        return response()->json('Cita ha sido eliminada.', 204);
     }
 }

@@ -37,8 +37,6 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
             'phone_number' => 'string|nullable',
-            'gender' => 'required',
-            'doctor' => 'required|boolean',
             'type' => 'required',
             'titles' => 'string|nullable',
             'cedulas' => 'string|nullable',
@@ -51,10 +49,9 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
-            'gender' => $request->gender,
             'titles' => $request->titles,
             'cedulas' => $request->cedulas,
-            'doctor' => $request->doctor,
+            'doctor' => 2 == $request->type ? true : false,
             'type' => $request->type,
         ]));
 

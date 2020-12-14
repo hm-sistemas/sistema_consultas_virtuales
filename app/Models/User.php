@@ -66,23 +66,6 @@ class User extends Authenticatable
         }
     }
 
-    public function gender()
-    {
-        switch ($this->gender) {
-            case 0:
-                return 'Masculino';
-
-                break;
-            case 1:
-                return 'Femenino';
-
-                break;
-            default:
-                // code...
-                break;
-        }
-    }
-
     public function appointments()
     {
         return $this->hasMany('App\Appointment');
