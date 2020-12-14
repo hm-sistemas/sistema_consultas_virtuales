@@ -1,3 +1,4 @@
-require('./bootstrap');
+require("./bootstrap");
 
-require('alpinejs');
+require("alpinejs");
+Vue.component("calendar", require("./components/Calendar.vue").default);

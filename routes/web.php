@@ -17,11 +17,11 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-    Route::get('/appointments', 'AppointmentController@index');
-    Route::get('/appointments/filter', 'AppointmentController@filter');
-    Route::post('/appointments/new', 'AppointmentController@store');
-    Route::patch('/appointments/{appointment}/edit', 'AppointmentController@update');
-    Route::delete('/appointments/{appointment}', 'AppointmentController@destroy');
+    Route::get('/appointments', 'AppointmentController@index')->name('appointments');
+    Route::get('/appointments/filter', 'AppointmentController@filter')->name('appointments.filter');
+    Route::post('/appointments/new', 'AppointmentController@store')->name('appointments.store');
+    Route::patch('/appointments/{appointment}/edit', 'AppointmentController@update')->name('appointments.update');
+    Route::delete('/appointments/{appointment}', 'AppointmentController@destroy')->name('appointments.destroy');
 });
 
  Route::get('/', 'HomeController@welcome')->name('welcome');
