@@ -12,6 +12,7 @@
                     Consultas virtuales
                 </div>
             </div>
+            <calendar />
         </div>
     </div>
 </x-app-layout>
