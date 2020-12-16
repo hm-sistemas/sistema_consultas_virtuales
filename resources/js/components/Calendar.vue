@@ -2,17 +2,7 @@
     <div>
         <FullCalendar
             ref="fullCalendar"
-            defaultView="timeGridDay"
             :options="calendarOptions"
-            :header="{
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            }"
-            :plugins="calendarPlugins"
-            :weekends="calendarWeekends"
-            :events="calendarEvents"
-            @dateClick="handleDateClick"
             @eventDrop="handleEventDrop"
             @eventClick="handleEventClick"
             @eventResize="eventResize"
@@ -28,13 +18,13 @@
             @event-created="newEventCreated"
         />
 
-        <show-appointment-modal
+        <!-- <show-appointment-modal
             :show="show_event_details_modal"
             :event="current_event"
             @close="show_event_details_modal = false"
             @event-deleted="rerenderCalendar"
             @event-updated="rerenderCalendar"
-        />
+        /> -->
     </div>
 </template>
 
@@ -44,53 +34,75 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import AddAppointmentModal from "./AddAppointmentModal";
-import ShowAppointmentModal from "./ShowAppointmentModal";
+/* import ShowAppointmentModal from "./ShowAppointmentModal"; */
 import Noty from "noty";
 
-import "@fullcalendar/core/main.css";
+/* import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
-import "@fullcalendar/timegrid/main.css";
+import "@fullcalendar/timegrid/main.css"; */
 
 export default {
     name: "Calendar",
     components: {
         FullCalendar,
-        AddAppointmentModal,
-        ShowAppointmentModal
+        AddAppointmentModal
+        /* ShowAppointmentModal */
     },
-    data: () => ({
-        new_event_modal_open: false,
-        event_detail_modal_open: false,
-        new_event_details: {
-            start: null,
-            end: null
-        },
-        current_event: null,
-        show_event_details_modal: false,
+    data() {
+        var self = this;
+        return {
+            new_event_modal_open: false,
+            event_detail_modal_open: false,
+            new_event_details: {
+                start: null,
+                end: null
+            },
+            current_event: null,
+            show_event_details_modal: false,
 
-        /* Full Calendar Options Start */
-        calendarPlugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+            /* Full Calendar Options Start */
+            /* calendarPlugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         calendarWeekends: true,
         calendarEvents: {
             url: "/appointments/filter"
         },
-        locale: itLocale,
-        calendarOptions: {
-            eventLimit: true,
-            views: {
-                timeGrid: {
-                    eventLimit: 4
+        locale: "en", */
+            calendarOptions: {
+                locale: "en",
+                headerToolbar: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
                 },
-                monthGrid: {
-                    eventLimit: 4
+                plugins: [dayGridPlugin, interactionPlugin],
+                initialView: "dayGridMonth",
+                eventLimit: true,
+                views: {
+                    timeGrid: {
+                        eventLimit: 4
+                    },
+                    monthGrid: {
+                        eventLimit: 4
+                    },
+                    dayGrid: {
+                        eventLimit: 4
+                    }
                 },
-                dayGrid: {
-                    eventLimit: 4
-                }
+                events: {
+                    url: "/appointments/filter",
+                    weekends: true
+                },
+                editable: true,
+                navLinks: true,
+                timeZone: "PST",
+                dateClick: self.handleDateClick,
+                eventDrop: self.handleEventDrop,
+                eventClick: self.handleEventClick,
+                eventResize: self.eventResize
             }
-        }
-        /* Full Calendar Options End */
-    }),
+            /* Full Calendar Options End */
+        };
+    },
 
     methods: {
         handleDateClick(e) {
