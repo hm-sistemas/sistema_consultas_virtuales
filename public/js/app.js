@@ -20695,23 +20695,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["show", "date"],
   data: function data() {
     return {
       event: {
-        title: null,
-        assignee: "nobody",
-        note: null
+        description: null,
+        user_id: "nobody",
+        comments: null,
+        start: "12:00"
       },
       users: []
     };
   },
   methods: {
     closeModal: function closeModal() {
-      this.event.title = null;
-      this.event.assignee = "nobody";
-      this.event.note = null;
+      this.event.description = null;
+      this.event.user_id = "nobody";
+      this.event.comments = null;
       this.$emit("close");
     },
     formatDate: function formatDate(date) {
@@ -20744,11 +20770,10 @@ __webpack_require__.r(__webpack_exports__);
 
       var eventData = this.transformEventDates(this.date.start, this.date.end);
       var newEventData = {
-        start: eventData.start,
-        end: eventData.end,
-        title: this.event.title,
-        assignee: this.event.assignee,
-        note: this.event.note
+        start: this.event.start,
+        description: this.event.description,
+        user_id: this.event.user_id,
+        comments: this.event.comments
       };
       this.$api.appointments.create(newEventData).then(function (_ref) {
         var data = _ref.data;
@@ -20763,21 +20788,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     validEventData: function validEventData() {
-      return !!(this.event.title && this.event.assignee != "nobody");
+      return !!(this.event.start && this.event.user_id != "nobody");
     }
   },
   mounted: function mounted() {// I absctracted my API calls, this would be the same as:
     // axios.get('/users').then( .... ) ...
 
     /* this.$api.users
-        .index()
-        .then(({ data }) => {
-            this.users = data;
-        })
-        .catch(error => {
-            this.users = [];
-            this.event.assignee = null;
-        }); */
+            .index()
+            .then(({ data }) => {
+                this.users = data;
+            })
+            .catch(error => {
+                this.users = [];
+                this.event.user_id = null;
+            }); */
   }
 });
 
@@ -20799,6 +20824,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AddAppointmentModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AddAppointmentModal */ "./resources/js/components/AddAppointmentModal.vue");
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
 /* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! dayjs/locale/es */ "./node_modules/dayjs/locale/es.js");
+/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(dayjs_locale_es__WEBPACK_IMPORTED_MODULE_7__);
 //
 //
 //
@@ -20837,6 +20866,15 @@ __webpack_require__.r(__webpack_exports__);
 /* import ShowAppointmentModal from "./ShowAppointmentModal"; */
 
 
+
+
+
+var customParseFormat = __webpack_require__(/*! dayjs/plugin/customParseFormat */ "./node_modules/dayjs/plugin/customParseFormat.js");
+
+var localizedFormat = __webpack_require__(/*! dayjs/plugin/localizedFormat */ "./node_modules/dayjs/plugin/localizedFormat.js");
+
+dayjs__WEBPACK_IMPORTED_MODULE_6___default.a.extend(localizedFormat);
+dayjs__WEBPACK_IMPORTED_MODULE_6___default.a.extend(customParseFormat);
 /* import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css"; */
@@ -20856,7 +20894,7 @@ import "@fullcalendar/timegrid/main.css"; */
       event_detail_modal_open: false,
       new_event_details: {
         start: null,
-        end: null
+        date: null
       },
       current_event: null,
       show_event_details_modal: false,
@@ -20910,9 +20948,9 @@ import "@fullcalendar/timegrid/main.css"; */
     handleDateClick: function handleDateClick(e) {
       this.new_event_modal_open = true;
       this.new_event_start = e.dateStr;
-      var endTime = new Date(e.dateStr).toISOString();
+      console.log(e.dateStr);
       this.new_event_details.start = e.dateStr;
-      this.new_event_details.end = endTime;
+      this.new_event_details.date = dayjs__WEBPACK_IMPORTED_MODULE_6___default()(e.dateStr, 'YYYY-MM-DD', true).locale('es').format("dddd, LL");
     },
     handleEventDrop: function handleEventDrop(e) {
       var updatedEventData = {
@@ -20944,7 +20982,6 @@ import "@fullcalendar/timegrid/main.css"; */
     },
     resetNewEventData: function resetNewEventData() {
       this.new_event_details.start = null;
-      this.new_event_details.end = null;
       this.new_event_details.title = null;
       this.new_event_modal_open = false;
     },
@@ -21146,6 +21183,54 @@ function toComment(sourceMap) {
 
 	return '/*# ' + data + ' */';
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/dayjs/dayjs.min.js":
+/*!*****************************************!*\
+  !*** ./node_modules/dayjs/dayjs.min.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():undefined}(this,function(){"use strict";var t="millisecond",e="second",n="minute",r="hour",i="day",s="week",u="month",a="quarter",o="year",f="date",h=/^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d+)?$/,c=/\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,d={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},$=function(t,e,n){var r=String(t);return!r||r.length>=e?t:""+Array(e+1-r.length).join(n)+t},l={s:$,z:function(t){var e=-t.utcOffset(),n=Math.abs(e),r=Math.floor(n/60),i=n%60;return(e<=0?"+":"-")+$(r,2,"0")+":"+$(i,2,"0")},m:function t(e,n){if(e.date()<n.date())return-t(n,e);var r=12*(n.year()-e.year())+(n.month()-e.month()),i=e.clone().add(r,u),s=n-i<0,a=e.clone().add(r+(s?-1:1),u);return+(-(r+(n-i)/(s?i-a:a-i))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(h){return{M:u,y:o,w:s,d:i,D:f,h:r,m:n,s:e,ms:t,Q:a}[h]||String(h||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},y="en",M={};M[y]=d;var m=function(t){return t instanceof S},D=function(t,e,n){var r;if(!t)return y;if("string"==typeof t)M[t]&&(r=t),e&&(M[t]=e,r=t);else{var i=t.name;M[i]=t,r=i}return!n&&r&&(y=r),r||!n&&y},v=function(t,e){if(m(t))return t.clone();var n="object"==typeof e?e:{};return n.date=t,n.args=arguments,new S(n)},g=l;g.l=D,g.i=m,g.w=function(t,e){return v(t,{locale:e.$L,utc:e.$u,x:e.$x,$offset:e.$offset})};var S=function(){function d(t){this.$L=D(t.locale,null,!0),this.parse(t)}var $=d.prototype;return $.parse=function(t){this.$d=function(t){var e=t.date,n=t.utc;if(null===e)return new Date(NaN);if(g.u(e))return new Date;if(e instanceof Date)return new Date(e);if("string"==typeof e&&!/Z$/i.test(e)){var r=e.match(h);if(r){var i=r[2]-1||0,s=(r[7]||"0").substring(0,3);return n?new Date(Date.UTC(r[1],i,r[3]||1,r[4]||0,r[5]||0,r[6]||0,s)):new Date(r[1],i,r[3]||1,r[4]||0,r[5]||0,r[6]||0,s)}}return new Date(e)}(t),this.$x=t.x||{},this.init()},$.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},$.$utils=function(){return g},$.isValid=function(){return!("Invalid Date"===this.$d.toString())},$.isSame=function(t,e){var n=v(t);return this.startOf(e)<=n&&n<=this.endOf(e)},$.isAfter=function(t,e){return v(t)<this.startOf(e)},$.isBefore=function(t,e){return this.endOf(e)<v(t)},$.$g=function(t,e,n){return g.u(t)?this[e]:this.set(n,t)},$.unix=function(){return Math.floor(this.valueOf()/1e3)},$.valueOf=function(){return this.$d.getTime()},$.startOf=function(t,a){var h=this,c=!!g.u(a)||a,d=g.p(t),$=function(t,e){var n=g.w(h.$u?Date.UTC(h.$y,e,t):new Date(h.$y,e,t),h);return c?n:n.endOf(i)},l=function(t,e){return g.w(h.toDate()[t].apply(h.toDate("s"),(c?[0,0,0,0]:[23,59,59,999]).slice(e)),h)},y=this.$W,M=this.$M,m=this.$D,D="set"+(this.$u?"UTC":"");switch(d){case o:return c?$(1,0):$(31,11);case u:return c?$(1,M):$(0,M+1);case s:var v=this.$locale().weekStart||0,S=(y<v?y+7:y)-v;return $(c?m-S:m+(6-S),M);case i:case f:return l(D+"Hours",0);case r:return l(D+"Minutes",1);case n:return l(D+"Seconds",2);case e:return l(D+"Milliseconds",3);default:return this.clone()}},$.endOf=function(t){return this.startOf(t,!1)},$.$set=function(s,a){var h,c=g.p(s),d="set"+(this.$u?"UTC":""),$=(h={},h[i]=d+"Date",h[f]=d+"Date",h[u]=d+"Month",h[o]=d+"FullYear",h[r]=d+"Hours",h[n]=d+"Minutes",h[e]=d+"Seconds",h[t]=d+"Milliseconds",h)[c],l=c===i?this.$D+(a-this.$W):a;if(c===u||c===o){var y=this.clone().set(f,1);y.$d[$](l),y.init(),this.$d=y.set(f,Math.min(this.$D,y.daysInMonth())).$d}else $&&this.$d[$](l);return this.init(),this},$.set=function(t,e){return this.clone().$set(t,e)},$.get=function(t){return this[g.p(t)]()},$.add=function(t,a){var f,h=this;t=Number(t);var c=g.p(a),d=function(e){var n=v(h);return g.w(n.date(n.date()+Math.round(e*t)),h)};if(c===u)return this.set(u,this.$M+t);if(c===o)return this.set(o,this.$y+t);if(c===i)return d(1);if(c===s)return d(7);var $=(f={},f[n]=6e4,f[r]=36e5,f[e]=1e3,f)[c]||1,l=this.$d.getTime()+t*$;return g.w(l,this)},$.subtract=function(t,e){return this.add(-1*t,e)},$.format=function(t){var e=this;if(!this.isValid())return"Invalid Date";var n=t||"YYYY-MM-DDTHH:mm:ssZ",r=g.z(this),i=this.$locale(),s=this.$H,u=this.$m,a=this.$M,o=i.weekdays,f=i.months,h=function(t,r,i,s){return t&&(t[r]||t(e,n))||i[r].substr(0,s)},d=function(t){return g.s(s%12||12,t,"0")},$=i.meridiem||function(t,e,n){var r=t<12?"AM":"PM";return n?r.toLowerCase():r},l={YY:String(this.$y).slice(-2),YYYY:this.$y,M:a+1,MM:g.s(a+1,2,"0"),MMM:h(i.monthsShort,a,f,3),MMMM:h(f,a),D:this.$D,DD:g.s(this.$D,2,"0"),d:String(this.$W),dd:h(i.weekdaysMin,this.$W,o,2),ddd:h(i.weekdaysShort,this.$W,o,3),dddd:o[this.$W],H:String(s),HH:g.s(s,2,"0"),h:d(1),hh:d(2),a:$(s,u,!0),A:$(s,u,!1),m:String(u),mm:g.s(u,2,"0"),s:String(this.$s),ss:g.s(this.$s,2,"0"),SSS:g.s(this.$ms,3,"0"),Z:r};return n.replace(c,function(t,e){return e||l[t]||r.replace(":","")})},$.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},$.diff=function(t,f,h){var c,d=g.p(f),$=v(t),l=6e4*($.utcOffset()-this.utcOffset()),y=this-$,M=g.m(this,$);return M=(c={},c[o]=M/12,c[u]=M,c[a]=M/3,c[s]=(y-l)/6048e5,c[i]=(y-l)/864e5,c[r]=y/36e5,c[n]=y/6e4,c[e]=y/1e3,c)[d]||y,h?M:g.a(M)},$.daysInMonth=function(){return this.endOf(u).$D},$.$locale=function(){return M[this.$L]},$.locale=function(t,e){if(!t)return this.$L;var n=this.clone(),r=D(t,e,!0);return r&&(n.$L=r),n},$.clone=function(){return g.w(this.$d,this)},$.toDate=function(){return new Date(this.valueOf())},$.toJSON=function(){return this.isValid()?this.toISOString():null},$.toISOString=function(){return this.$d.toISOString()},$.toString=function(){return this.$d.toUTCString()},d}(),p=S.prototype;return v.prototype=p,[["$ms",t],["$s",e],["$m",n],["$H",r],["$W",i],["$M",u],["$y",o],["$D",f]].forEach(function(t){p[t[1]]=function(e){return this.$g(e,t[0],t[1])}}),v.extend=function(t,e){return t.$i||(t(e,S,v),t.$i=!0),v},v.locale=D,v.isDayjs=m,v.unix=function(t){return v(1e3*t)},v.en=M[y],v.Ls=M,v.p={},v});
+
+
+/***/ }),
+
+/***/ "./node_modules/dayjs/locale/es.js":
+/*!*****************************************!*\
+  !*** ./node_modules/dayjs/locale/es.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,s){ true?module.exports=s(__webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js")):undefined}(this,function(e){"use strict";e=e&&e.hasOwnProperty("default")?e.default:e;var s={name:"es",monthsShort:"ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic".split("_"),weekdays:"domingo_lunes_martes_miércoles_jueves_viernes_sábado".split("_"),weekdaysShort:"dom._lun._mar._mié._jue._vie._sáb.".split("_"),weekdaysMin:"do_lu_ma_mi_ju_vi_sá".split("_"),months:"Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre".split("_"),weekStart:1,formats:{LT:"H:mm",LTS:"H:mm:ss",L:"DD/MM/YYYY",LL:"D [de] MMMM [de] YYYY",LLL:"D [de] MMMM [de] YYYY H:mm",LLLL:"dddd, D [de] MMMM [de] YYYY H:mm"},relativeTime:{future:"en %s",past:"hace %s",s:"unos segundos",m:"un minuto",mm:"%d minutos",h:"una hora",hh:"%d horas",d:"un día",dd:"%d días",M:"un mes",MM:"%d meses",y:"un año",yy:"%d años"},ordinal:function(e){return e+"º"}};return e.locale(s,null,!0),s});
+
+
+/***/ }),
+
+/***/ "./node_modules/dayjs/plugin/customParseFormat.js":
+/*!********************************************************!*\
+  !*** ./node_modules/dayjs/plugin/customParseFormat.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(t,e){ true?module.exports=e():undefined}(this,function(){"use strict";var t,e={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},n=function(t,n){return t.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(t,r,i){var o=i&&i.toUpperCase();return r||n[i]||e[i]||n[o].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(t,e,n){return e||n.slice(1)})})},r=/(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g,i=/\d\d/,o=/\d\d?/,s=/\d*[^\s\d-:/()]+/;var a=function(t){return function(e){this[t]=+e}},f=[/[+-]\d\d:?(\d\d)?/,function(t){(this.zone||(this.zone={})).offset=function(t){if(!t)return 0;var e=t.match(/([+-]|\d\d)/g),n=60*e[1]+(+e[2]||0);return 0===n?0:"+"===e[0]?-n:n}(t)}],u=function(e){var n=t[e];return n&&(n.indexOf?n:n.s.concat(n.f))},h=function(e,n){var r,i=t.meridiem;if(i){for(var o=1;o<=24;o+=1)if(e.indexOf(i(o,0,n))>-1){r=o>12;break}}else r=e===(n?"pm":"PM");return r},d={A:[s,function(t){this.afternoon=h(t,!1)}],a:[s,function(t){this.afternoon=h(t,!0)}],S:[/\d/,function(t){this.milliseconds=100*+t}],SS:[i,function(t){this.milliseconds=10*+t}],SSS:[/\d{3}/,function(t){this.milliseconds=+t}],s:[o,a("seconds")],ss:[o,a("seconds")],m:[o,a("minutes")],mm:[o,a("minutes")],H:[o,a("hours")],h:[o,a("hours")],HH:[o,a("hours")],hh:[o,a("hours")],D:[o,a("day")],DD:[i,a("day")],Do:[s,function(e){var n=t.ordinal,r=e.match(/\d+/);if(this.day=r[0],n)for(var i=1;i<=31;i+=1)n(i).replace(/\[|\]/g,"")===e&&(this.day=i)}],M:[o,a("month")],MM:[i,a("month")],MMM:[s,function(t){var e=u("months"),n=(u("monthsShort")||e.map(function(t){return t.substr(0,3)})).indexOf(t)+1;if(n<1)throw new Error;this.month=n%12||n}],MMMM:[s,function(t){var e=u("months").indexOf(t)+1;if(e<1)throw new Error;this.month=e%12||e}],Y:[/[+-]?\d+/,a("year")],YY:[i,function(t){t=+t,this.year=t+(t>68?1900:2e3)}],YYYY:[/\d{4}/,a("year")],Z:f,ZZ:f};var c=function(e,i,o){try{var s=function(e){for(var i=(e=n(e,t&&t.formats)).match(r),o=i.length,s=0;s<o;s+=1){var a=i[s],f=d[a],u=f&&f[0],h=f&&f[1];i[s]=h?{regex:u,parser:h}:a.replace(/^\[|\]$/g,"")}return function(t){for(var e={},n=0,r=0;n<o;n+=1){var s=i[n];if("string"==typeof s)r+=s.length;else{var a=s.regex,f=s.parser,u=t.substr(r),h=a.exec(u)[0];f.call(e,h),t=t.replace(h,"")}}return function(t){var e=t.afternoon;if(void 0!==e){var n=t.hours;e?n<12&&(t.hours+=12):12===n&&(t.hours=0),delete t.afternoon}}(e),e}}(i)(e),a=s.year,f=s.month,u=s.day,h=s.hours,c=s.minutes,m=s.seconds,l=s.milliseconds,M=s.zone,Y=new Date,v=u||(a||f?1:Y.getDate()),p=a||Y.getFullYear(),D=0;a&&!f||(D=f>0?f-1:Y.getMonth());var y=h||0,L=c||0,g=m||0,$=l||0;return M?new Date(Date.UTC(p,D,v,y,L,g,$+60*M.offset*1e3)):o?new Date(Date.UTC(p,D,v,y,L,g,$)):new Date(p,D,v,y,L,g,$)}catch(t){return new Date("")}};return function(e,n,r){r.p.customParseFormat=!0;var i=n.prototype,o=i.parse;i.parse=function(e){var n=e.date,i=e.utc,s=e.args;this.$u=i;var a=s[1];if("string"==typeof a){var f=!0===s[2],u=!0===s[3],h=f||u,d=s[2];u&&(d=s[2]),f||(t=d?r.Ls[d]:this.$locale()),this.$d=c(n,a,i),this.init(),d&&!0!==d&&(this.$L=this.locale(d).$L),h&&n!==this.format(a)&&(this.$d=new Date("")),t=void 0}else if(a instanceof Array)for(var m=a.length,l=1;l<=m;l+=1){s[1]=a[l-1];var M=r.apply(this,s);if(M.isValid()){this.$d=M.$d,this.$L=M.$L,this.init();break}l===m&&(this.$d=new Date(""))}else o.call(this,e)}}});
+
+
+/***/ }),
+
+/***/ "./node_modules/dayjs/plugin/localizedFormat.js":
+/*!******************************************************!*\
+  !*** ./node_modules/dayjs/plugin/localizedFormat.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t():undefined}(this,function(){"use strict";var e={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"};return function(t,n,o){var r=n.prototype,M=r.format;o.en.formats=e,r.format=function(t){void 0===t&&(t="YYYY-MM-DDTHH:mm:ssZ");var n=this.$locale().formats,o=function(t,n){return t.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(t,o,r){var M=r&&r.toUpperCase();return o||n[r]||e[r]||n[M].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(e,t,n){return t||n.slice(1)})})}(t,void 0===n?{}:n);return M.call(this,o)}}});
 
 
 /***/ }),
@@ -42598,40 +42683,6 @@ var render = function() {
                           "div",
                           {
                             staticClass:
-                              "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "h-6 w-6 text-red-600",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  fill: "none",
-                                  viewBox: "0 0 24 24",
-                                  stroke: "currentColor",
-                                  "aria-hidden": "true"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    "stroke-linecap": "round",
-                                    "stroke-linejoin": "round",
-                                    "stroke-width": "2",
-                                    d:
-                                      "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
                               "mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
                           },
                           [
@@ -42644,22 +42695,212 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                Deactivate account\n                            "
+                                  "\n                Registrar nueva cita\n              "
                                 )
                               ]
                             ),
                             _vm._v(" "),
-                            _c("div", { staticClass: "mt-2" }, [
-                              _c(
-                                "p",
-                                { staticClass: "text-sm text-gray-500" },
-                                [
-                                  _vm._v(
-                                    "\n                                    Are you sure you want to deactivate your\n                                    account? All of your data will be\n                                    permanently removed. This action cannot\n                                    be undone.\n                                "
-                                  )
-                                ]
-                              )
-                            ])
+                            _c(
+                              "h5",
+                              {
+                                staticClass:
+                                  "mt-3 text-left sm:mt-0 sm:ml-4 sm:text-left font-medium text-green-400"
+                              },
+                              [_vm._v(_vm._s(_vm.date.date))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "mt-5 md:mt-0 md:col-span-2" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "overflow-hidden sm:rounded-md"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "px-4 py-5 bg-white sm:p-6"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "grid grid-cols-6 gap-6"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "start" }
+                                                  },
+                                                  [_vm._v("Hora")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.event.start,
+                                                      expression: "event.start"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                  attrs: {
+                                                    type: "time",
+                                                    id: "start",
+                                                    name: "start",
+                                                    min: "09:00",
+                                                    max: "18:00",
+                                                    required: ""
+                                                  },
+                                                  domProps: {
+                                                    value: _vm.event.start
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.event,
+                                                        "start",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: {
+                                                      for: "description"
+                                                    }
+                                                  },
+                                                  [_vm._v("Detalles")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("textarea", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.event.description,
+                                                      expression:
+                                                        "event.description"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                  attrs: {
+                                                    rows: "4",
+                                                    cols: "50",
+                                                    name: "description",
+                                                    id: "description"
+                                                  },
+                                                  domProps: {
+                                                    value: _vm.event.description
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.event,
+                                                        "description",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "comments" }
+                                                  },
+                                                  [_vm._v("Notas")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: _vm.event.comments,
+                                                      expression:
+                                                        "event.comments"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                  attrs: {
+                                                    type: "text",
+                                                    name: "comments",
+                                                    id: "comments"
+                                                  },
+                                                  domProps: {
+                                                    value: _vm.event.comments
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.event,
+                                                        "comments",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
                           ]
                         )
                       ])
@@ -42677,14 +42918,10 @@ var render = function() {
                         "button",
                         {
                           staticClass:
-                            "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm",
+                            "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
                           attrs: { type: "button" }
                         },
-                        [
-                          _vm._v(
-                            "\n                        Deactivate\n                    "
-                          )
-                        ]
+                        [_vm._v("\n            Guardar\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -42699,11 +42936,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                        Cancel\n                    "
-                          )
-                        ]
+                        [_vm._v("\n            Cancelar\n          ")]
                       )
                     ]
                   )

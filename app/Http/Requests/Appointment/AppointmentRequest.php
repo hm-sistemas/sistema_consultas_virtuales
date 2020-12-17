@@ -24,8 +24,7 @@ class AppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'start' => 'required|date|before:end',
-            'end' => 'required|date|after:start',
+            'start' => 'required',
             'user_id' => 'required',
             'comments' => 'string|nullable',
             'title' => 'string|required',

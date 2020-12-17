@@ -9,15 +9,16 @@ class Appointment extends Model
 {
     use HasFactory;
     public $fillable = [
-        'amount',
+        'start',
         'date',
+        'title',
+        'description',
         'comments',
-        'patient_id',
-        'procedure_id',
+        'user_id',
         'status',
     ];
 
-    protected $dates = ['date', 'start', 'end'];
+    protected $dates = ['date', 'start'];
 
     public function status()
     {

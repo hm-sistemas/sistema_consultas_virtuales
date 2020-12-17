@@ -36,7 +36,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 import AddAppointmentModal from "./AddAppointmentModal";
 /* import ShowAppointmentModal from "./ShowAppointmentModal"; */
 import Noty from "noty";
-
+import dayjs from 'dayjs'
+import 'dayjs/locale/es'
+var customParseFormat = require('dayjs/plugin/customParseFormat')
+var localizedFormat = require('dayjs/plugin/localizedFormat')
+dayjs.extend(localizedFormat)
+dayjs.extend(customParseFormat)
 /* import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css"; */
@@ -55,7 +60,7 @@ export default {
             event_detail_modal_open: false,
             new_event_details: {
                 start: null,
-                end: null
+                date: null
             },
             current_event: null,
             show_event_details_modal: false,
@@ -108,9 +113,9 @@ export default {
         handleDateClick(e) {
             this.new_event_modal_open = true;
             this.new_event_start = e.dateStr;
-            let endTime = new Date(e.dateStr).toISOString();
+            console.log(e.dateStr);
             this.new_event_details.start = e.dateStr;
-            this.new_event_details.end = endTime;
+            this.new_event_details.date = dayjs(e.dateStr, 'YYYY-MM-DD', true).locale('es').format("dddd, LL");
         },
 
         handleEventDrop(e) {
@@ -148,7 +153,6 @@ export default {
 
         resetNewEventData() {
             this.new_event_details.start = null;
-            this.new_event_details.end = null;
             this.new_event_details.title = null;
             this.new_event_modal_open = false;
         },

@@ -28,6 +28,7 @@
         "@fullcalendar/interaction": "^5.4.0",
         "@fullcalendar/timegrid": "^5.4.0",
         "@fullcalendar/vue": "^5.4.0",
+        "dayjs": "^1.9.7",
         "noty": "^3.2.0-beta",
         "vue": "^2.6.12"
     }

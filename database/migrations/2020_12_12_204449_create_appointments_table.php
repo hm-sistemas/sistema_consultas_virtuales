@@ -18,7 +18,6 @@ class CreateAppointmentsTable extends Migration
             $table->text('comments')->nullable();
 
             $table->dateTime('start');
-            $table->dateTime('end');
             $table->unsignedBigInteger('user_id');
             $table->tinyInteger('status')->default(0);
             $table->date('date');
