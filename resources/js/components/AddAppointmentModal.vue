@@ -124,6 +124,21 @@
 
                         <div class="col-span-6">
                           <label
+                            for="title"
+                            class="block text-sm font-medium text-gray-700"
+                            >Motivo</label
+                          >
+                          <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            v-model="event.title"
+                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          />
+                        </div>
+
+                        <div class="col-span-6">
+                          <label
                             for="description"
                             class="block text-sm font-medium text-gray-700"
                             >Detalles</label
@@ -190,6 +205,7 @@ export default {
       user_id: "nobody",
       comments: null,
       start: "12:00",
+      title: ""
     },
     doctors: [],
   }),
