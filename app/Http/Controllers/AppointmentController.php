@@ -54,8 +54,6 @@ class AppointmentController extends Controller
         $validated = $request->validated();
         $appointment = Appointment::create($validated);
 
-        //Update related incomes
-
         return (new AppointmentResource($appointment))->additional([
             'meta' => [
                 'success' => true,

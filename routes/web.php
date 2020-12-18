@@ -19,9 +19,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/appointments', 'AppointmentController@index')->name('appointments');
     Route::get('/appointments/filter', 'AppointmentController@filter')->name('appointments.filter');
-    Route::post('/appointments/new', 'AppointmentController@store')->name('appointments.store');
+    Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');
     Route::patch('/appointments/{appointment}/edit', 'AppointmentController@update')->name('appointments.update');
     Route::delete('/appointments/{appointment}', 'AppointmentController@destroy')->name('appointments.destroy');
+
+    Route::get('/doctors', 'DoctorController@doctors')->name('doctors');
+
+    Route::post('/patients', 'PatientController@store')->name('patients.store');
 });
 
  Route::get('/', 'HomeController@welcome')->name('welcome');

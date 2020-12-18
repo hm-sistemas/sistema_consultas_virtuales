@@ -20720,6 +20720,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["show", "date"],
   data: function data() {
@@ -20730,7 +20759,7 @@ __webpack_require__.r(__webpack_exports__);
         comments: null,
         start: "12:00"
       },
-      users: []
+      doctors: []
     };
   },
   methods: {
@@ -20740,50 +20769,24 @@ __webpack_require__.r(__webpack_exports__);
       this.event.comments = null;
       this.$emit("close");
     },
-    formatDate: function formatDate(date) {
-      var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "DD/MM/YY HH:mm";
-      return moment.utc(date).format(format);
-    },
-    transformEventDates: function transformEventDates(start, end) {
-      // if start is same as end add 1hr
-      var startTime = new Date(start);
-      var endTime = new Date(end);
-
-      if (startTime.getTime() === endTime.getTime()) {
-        var _endTime = new Date(end);
-
-        _endTime.setHours(_endTime.getHours() + 1);
-
-        return {
-          start: start,
-          end: _endTime.toISOString()
-        };
-      }
-
-      return {
-        start: start,
-        end: end
-      };
-    },
     saveEvent: function saveEvent() {
-      var _this = this;
-
-      var eventData = this.transformEventDates(this.date.start, this.date.end);
       var newEventData = {
         start: this.event.start,
+        date: this.date.start,
         description: this.event.description,
         user_id: this.event.user_id,
         comments: this.event.comments
       };
-      this.$api.appointments.create(newEventData).then(function (_ref) {
-        var data = _ref.data;
-
-        _this.closeModal();
-
-        _this.$emit("event-created");
-      })["catch"](function (error) {
-        _this.$emit("error");
-      });
+      console.log(newEventData);
+      /* this.$api.appointments
+        .create(newEventData)
+        .then(({ data }) => {
+          this.closeModal();
+          this.$emit("event-created");
+        })
+        .catch((error) => {
+          this.$emit("error");
+        }); */
     }
   },
   computed: {
@@ -20791,18 +20794,15 @@ __webpack_require__.r(__webpack_exports__);
       return !!(this.event.start && this.event.user_id != "nobody");
     }
   },
-  mounted: function mounted() {// I absctracted my API calls, this would be the same as:
-    // axios.get('/users').then( .... ) ...
+  mounted: function mounted() {
+    var _this = this;
 
-    /* this.$api.users
-            .index()
-            .then(({ data }) => {
-                this.users = data;
-            })
-            .catch(error => {
-                this.users = [];
-                this.event.user_id = null;
-            }); */
+    axios.get("/doctors").then(function (response) {
+      console.log(response.data);
+      _this.doctors = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
 });
 
@@ -42706,7 +42706,13 @@ var render = function() {
                                 staticClass:
                                   "mt-3 text-left sm:mt-0 sm:ml-4 sm:text-left font-medium text-green-400"
                               },
-                              [_vm._v(_vm._s(_vm.date.date))]
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(_vm.date.date) +
+                                    "\n              "
+                                )
+                              ]
                             ),
                             _vm._v(" "),
                             _c(
@@ -42732,6 +42738,112 @@ var render = function() {
                                               "grid grid-cols-6 gap-6"
                                           },
                                           [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "user_id" }
+                                                  },
+                                                  [_vm._v("Doctor")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.event.user_id,
+                                                        expression:
+                                                          "event.user_id"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                                    attrs: {
+                                                      id: "user_id",
+                                                      name: "user_id"
+                                                    },
+                                                    on: {
+                                                      change: function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.event,
+                                                          "user_id",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: {
+                                                          disabled: "",
+                                                          selected: "",
+                                                          value: "nobody"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            Seleccionar doctor\n                          "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.doctors,
+                                                      function(doctor) {
+                                                        return _c(
+                                                          "option",
+                                                          {
+                                                            key: doctor.id,
+                                                            domProps: {
+                                                              value: doctor.id
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                            " +
+                                                                _vm._s(
+                                                                  doctor.full_name
+                                                                ) +
+                                                                "\n                          "
+                                                            )
+                                                          ]
+                                                        )
+                                                      }
+                                                    )
+                                                  ],
+                                                  2
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "div",
                                               { staticClass: "col-span-6" },
@@ -42919,7 +43031,12 @@ var render = function() {
                         {
                           staticClass:
                             "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
-                          attrs: { type: "button" }
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.saveEvent()
+                            }
+                          }
                         },
                         [_vm._v("\n            Guardar\n          ")]
                       ),
