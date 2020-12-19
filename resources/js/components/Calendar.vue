@@ -13,7 +13,7 @@
 
     <add-appointment-modal
       :show="new_event_modal_open"
-      :date="new_event_details"
+      :event="new_event_details"
       @close="resetNewEventData"
       @event-created="newEventCreated"
     />
@@ -33,15 +33,12 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
+import esLocale from "@fullcalendar/core/locales/es";
 import AddAppointmentModal from "./AddAppointmentModal";
 /* import ShowAppointmentModal from "./ShowAppointmentModal"; */
 import Noty from "noty";
-import dayjs from "dayjs";
-import "dayjs/locale/es";
-var customParseFormat = require("dayjs/plugin/customParseFormat");
-var localizedFormat = require("dayjs/plugin/localizedFormat");
-dayjs.extend(localizedFormat);
-dayjs.extend(customParseFormat);
+
 /* import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css"; */
@@ -59,41 +56,30 @@ export default {
       new_event_modal_open: false,
       event_detail_modal_open: false,
       new_event_details: {
-        start: null,
         date: null,
+        dateStr: null,
       },
       current_event: null,
       show_event_details_modal: false,
 
       /* Full Calendar Options Start */
       calendarOptions: {
-        locale: "es",
+        timeZone: "UTC",
+        locale: esLocale,
+        allDaySlot: false,
         headerToolbar: {
           left: "prev,next today",
           center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+          right: "timeGridWeek,timeGridDay,listWeek",
         },
-        plugins: [dayGridPlugin, interactionPlugin],
-        initialView: "dayGridMonth",
-        eventLimit: true,
-        views: {
-          timeGrid: {
-            eventLimit: 4,
-          },
-          monthGrid: {
-            eventLimit: 4,
-          },
-          dayGrid: {
-            eventLimit: 4,
-          },
-        },
+        plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
+        initialView: "timeGridWeek",
         events: {
           url: "/appointments/filter",
           weekends: true,
         },
         editable: true,
         navLinks: true,
-        timeZone: "PST",
         dateClick: self.handleDateClick,
         eventDrop: self.handleEventDrop,
         eventClick: self.handleEventClick,
@@ -107,11 +93,12 @@ export default {
     handleDateClick(e) {
       this.new_event_modal_open = true;
       this.new_event_start = e.dateStr;
-      console.log(e.dateStr);
-      this.new_event_details.start = e.dateStr;
-      this.new_event_details.date = dayjs(e.dateStr, "YYYY-MM-DD", true)
-        .locale("es")
-        .format("dddd, LL");
+      console.log(e);
+      this.new_event_details.dateStr = e.dateStr;
+      this.new_event_details.date = e.date;
+      /* dayjs(e.dateStr, "YYYY-MM-DD", true)
+          .locale("es")
+          .format("dddd, LL"); */
     },
 
     handleEventDrop(e) {
@@ -141,10 +128,6 @@ export default {
     handleEventClick(e) {
       this.current_event = e.event;
       this.show_event_details_modal = true;
-    },
-
-    formatDate(date) {
-      return moment.utc(date).format("DD/MM/YY HH:mm");
     },
 
     resetNewEventData() {

@@ -261,14 +261,14 @@ export default {
       this.patient.full_name = this.patient.name + " " + this.patient.last_name;
       console.log(this.patient);
       axios.post("/patients", this.patient).then((response) => {
-          console.log(response.data);
-           new Noty({
-            text: `Paciente ha sido registrado.`,
-            timeout: 700,
-            type: "success",
-          }).show();
-          this.closeModal();
-      })
+        console.log(response.data);
+        new Noty({
+          text: `Paciente ha sido registrado.`,
+          timeout: 700,
+          type: "success",
+        }).show();
+        this.closeModal();
+      });
 
       /* this.$api.appointments
         .create(newEventData)
@@ -290,10 +290,10 @@ export default {
 
   mounted() {
     new Noty({
-            text: `Event has been updated.`,
-            timeout: 700,
-            type: "success",
-          }).show();
+      text: `Event has been updated.`,
+      timeout: 700,
+      type: "success",
+    }).show();
   },
 };
 </script>

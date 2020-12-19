@@ -74,7 +74,7 @@
                 <h5
                   class="mt-3 text-left sm:mt-0 sm:ml-4 sm:text-left font-medium text-green-400"
                 >
-                  {{ date.date }}
+                  {{ dateStr }}
                 </h5>
                 <div class="mt-5 md:mt-0 md:col-span-2">
                   <div class="overflow-hidden sm:rounded-md">
@@ -89,7 +89,7 @@
                           <select
                             id="user_id"
                             name="user_id"
-                             v-model="event.user_id"
+                            v-model="appointment.user_id"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
                             <option disabled selected value="nobody">
@@ -104,7 +104,7 @@
                             </option>
                           </select>
                         </div>
-                        <div class="col-span-6">
+                        <!-- <div class="col-span-6">
                           <label
                             for="start"
                             class="block text-sm font-medium text-gray-700"
@@ -115,12 +115,12 @@
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             id="start"
                             name="start"
-                            v-model="event.start"
+                            v-model="appointment.start"
                             min="09:00"
                             max="18:00"
                             required
                           />
-                        </div>
+                        </div> -->
 
                         <div class="col-span-6">
                           <label
@@ -132,7 +132,7 @@
                             type="text"
                             name="title"
                             id="title"
-                            v-model="event.title"
+                            v-model="appointment.title"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
@@ -148,7 +148,7 @@
                             cols="50"
                             name="description"
                             id="description"
-                            v-model="event.description"
+                            v-model="appointment.description"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
@@ -163,7 +163,7 @@
                             type="text"
                             name="comments"
                             id="comments"
-                            v-model="event.comments"
+                            v-model="appointment.comments"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
                         </div>
@@ -197,34 +197,43 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
+import "dayjs/locale/es";
+var customParseFormat = require("dayjs/plugin/customParseFormat");
+var localizedFormat = require("dayjs/plugin/localizedFormat");
+var utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
+dayjs.extend(localizedFormat);
+dayjs.extend(customParseFormat);
 export default {
-  props: ["show", "date"],
+  props: ["show", "event"],
   data: () => ({
-    event: {
+    appointment: {
       description: null,
       user_id: "nobody",
       comments: null,
-      start: "12:00",
-      title: ""
+      /* start: "12:00", */
+      title: "",
     },
     doctors: [],
   }),
 
   methods: {
     closeModal() {
-      this.event.description = null;
-      this.event.user_id = "nobody";
-      this.event.comments = null;
+      this.appointment.description = null;
+      this.appointment.user_id = "nobody";
+      this.appointment.comments = null;
       this.$emit("close");
     },
 
+
+
     saveEvent() {
       let newEventData = {
-        start: this.event.start,
-        date: this.date.start,
-        description: this.event.description,
-        user_id: this.event.user_id,
-        comments: this.event.comments,
+        start: this.appointment.start,
+        description: this.appointment.description,
+        user_id: this.appointment.user_id,
+        comments: this.appointment.comments,
       };
 
       console.log(newEventData);
@@ -243,8 +252,12 @@ export default {
 
   computed: {
     validEventData() {
-      return !!(this.event.start && this.event.user_id != "nobody");
+      return !!(this.appointment.start && this.appointment.user_id != "nobody");
     },
+    dateStr() {
+      return dayjs(this.event.dateStr).locale("es").utc().format("LLLL");
+    },
+
   },
 
   mounted() {
