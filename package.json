@@ -33,6 +33,7 @@
         "@fullcalendar/vue": "^5.4.0",
         "dayjs": "^1.9.7",
         "noty": "^3.2.0-beta",
-        "vue": "^2.6.12"
+        "vue": "^2.6.12",
+        "vue-select": "^3.11.2"
     }
 }

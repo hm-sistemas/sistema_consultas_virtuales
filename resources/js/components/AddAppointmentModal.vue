@@ -84,6 +84,17 @@
                           <label
                             for="user_id"
                             class="block text-sm font-medium text-gray-700"
+                            >Paciente</label
+                          >
+                          <v-select
+                            :filterable="false"
+                            :options="['Canada', 'United States']"
+                          ></v-select>
+                        </div>
+                        <div class="col-span-6">
+                          <label
+                            for="user_id"
+                            class="block text-sm font-medium text-gray-700"
                             >Doctor</label
                           >
                           <select
@@ -201,8 +212,8 @@ import dayjs from "dayjs";
 import "dayjs/locale/es";
 var customParseFormat = require("dayjs/plugin/customParseFormat");
 var localizedFormat = require("dayjs/plugin/localizedFormat");
-var utc = require('dayjs/plugin/utc')
-dayjs.extend(utc)
+var utc = require("dayjs/plugin/utc");
+dayjs.extend(utc);
 dayjs.extend(localizedFormat);
 dayjs.extend(customParseFormat);
 export default {
@@ -216,6 +227,7 @@ export default {
       title: "",
     },
     doctors: [],
+    patients: [],
   }),
 
   methods: {
@@ -226,7 +238,23 @@ export default {
       this.$emit("close");
     },
 
-
+    onSearch(search, loading) {
+      if (search.length) {
+        loading(true);
+        this.search(loading, search, this);
+      }
+    },
+    search: _.debounce((loading, search, vm) => {
+      axios
+        .get("/patients/filter", { params: { name: search } })
+        .then((response) => {
+          console.log(response.data);
+          vm.patients = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 350),
 
     saveEvent() {
       let newEventData = {
@@ -257,7 +285,6 @@ export default {
     dateStr() {
       return dayjs(this.event.dateStr).locale("es").utc().format("LLLL");
     },
-
   },
 
   mounted() {

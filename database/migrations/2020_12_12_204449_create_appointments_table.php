@@ -17,11 +17,17 @@ class CreateAppointmentsTable extends Migration
             $table->text('description')->nullable();
             $table->text('comments')->nullable();
 
-            $table->dateTime('start');
+            $table->dateTimeTz('start');
+            $table->dateTimeTz('end');
+
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('patient_id');
+            $table->boolean('first_time')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->date('date');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('patient_id')->references('id')->on('patients')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

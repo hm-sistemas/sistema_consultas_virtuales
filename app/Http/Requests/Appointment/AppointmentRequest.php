@@ -25,8 +25,11 @@ class AppointmentRequest extends FormRequest
     {
         return [
             'start' => 'required',
+            'end' => 'required',
             'date' => 'required|date',
             'user_id' => 'required',
+            'patient_id' => 'required',
+            'first_time' => 'required',
             'comments' => 'string|nullable',
             'title' => 'string|required',
             'description' => 'string|nullable',
