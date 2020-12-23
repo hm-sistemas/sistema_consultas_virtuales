@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/doctors', 'DoctorController@doctors')->name('doctors');
 
     Route::post('/patients', 'PatientController@store')->name('patients.store');
-    Route::get('/patients/filter', 'AppointmentController@filter')->name('patients.filter');
+    Route::get('/patients/filter', 'PatientController@filter')->name('patients.filter');
 });
 
  Route::get('/', 'HomeController@welcome')->name('welcome');

@@ -17,6 +17,7 @@ class Appointment extends Model
         'comments',
         'first_time',
         'user_id',
+        'patient_id',
         'status',
     ];
 

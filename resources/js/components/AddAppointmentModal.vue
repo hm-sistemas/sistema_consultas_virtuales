@@ -88,8 +88,42 @@
                           >
                           <v-select
                             :filterable="false"
-                            :options="['Canada', 'United States']"
+                            :options="patients"
+                            @search="onSearch"
+                            label="full_name"
+                            v-model="appointment.patient"
                           ></v-select>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <!-- <legend class="text-base font-medium text-gray-900">
+                              By Email
+                            </legend> -->
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="first_time"
+                                    name="first_time"
+                                    type="checkbox"
+                                    v-model="appointment.first_time"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="first_time"
+                                    class="font-medium text-gray-700"
+                                    >Primera Vez</label
+                                  >
+                                  <!-- <p class="text-gray-500">
+                                    Get notified when someones posts a comment
+                                    on a posting.
+                                  </p> -->
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
                         </div>
                         <div class="col-span-6">
                           <label
@@ -103,7 +137,7 @@
                             v-model="appointment.user_id"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
-                            <option disabled selected value="nobody">
+                            <option disabled selected value="0">
                               Seleccionar doctor
                             </option>
                             <option
@@ -221,10 +255,11 @@ export default {
   data: () => ({
     appointment: {
       description: null,
-      user_id: "nobody",
+      user_id: 0,
+      patient: null,
       comments: null,
-      /* start: "12:00", */
       title: "",
+      first_time: false,
     },
     doctors: [],
     patients: [],
@@ -248,8 +283,10 @@ export default {
       axios
         .get("/patients/filter", { params: { name: search } })
         .then((response) => {
-          console.log(response.data);
-          vm.patients = response.data;
+          console.log("PATIENTS", response.data);
+          vm.patients = response.data.data;
+          console.log(vm.patients);
+          loading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -257,14 +294,30 @@ export default {
     }, 350),
 
     saveEvent() {
+      let date = dayjs(this.event.date).format("YYYY-MM-DD");
+      let end = dayjs(this.event.date).add(1, "hour");
       let newEventData = {
-        start: this.appointment.start,
+        start: this.event.dateStr,
+        end: end.toISOString(),
+        date: date,
         description: this.appointment.description,
         user_id: this.appointment.user_id,
+        title: this.appointment.title,
+        patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
+        first_time: this.appointment.first_time,
       };
 
       console.log(newEventData);
+
+      axios.post("/appointments", newEventData).then((response) => {
+        console.log(response);
+        this.closeModal();
+        this.$emit("event-created");
+      }).catch((error) => {
+        console.log(error);
+        this.$emit("error");
+      })
 
       /* this.$api.appointments
         .create(newEventData)
@@ -280,7 +333,7 @@ export default {
 
   computed: {
     validEventData() {
-      return !!(this.appointment.start && this.appointment.user_id != "nobody");
+      return this.appointment.title != "" && this.appointment.user_id > 0;
     },
     dateStr() {
       return dayjs(this.event.dateStr).locale("es").utc().format("LLLL");

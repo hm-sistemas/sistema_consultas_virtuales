@@ -21436,6 +21436,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -21454,11 +21488,11 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
     return {
       appointment: {
         description: null,
-        user_id: "nobody",
+        user_id: 0,
+        patient: null,
         comments: null,
-
-        /* start: "12:00", */
-        title: ""
+        title: "",
+        first_time: false
       },
       doctors: [],
       patients: []
@@ -21483,20 +21517,42 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
           name: search
         }
       }).then(function (response) {
-        console.log(response.data);
-        vm.patients = response.data;
+        console.log("PATIENTS", response.data);
+        vm.patients = response.data.data;
+        console.log(vm.patients);
+        loading(false);
       })["catch"](function (error) {
         console.log(error);
       });
     }, 350),
     saveEvent: function saveEvent() {
+      var _this = this;
+
+      var date = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.event.date).format("YYYY-MM-DD");
+      var end = dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.event.date).add(1, "hour");
       var newEventData = {
-        start: this.appointment.start,
+        start: this.event.dateStr,
+        end: end.toISOString(),
+        date: date,
         description: this.appointment.description,
         user_id: this.appointment.user_id,
-        comments: this.appointment.comments
+        title: this.appointment.title,
+        patient_id: this.appointment.patient.id,
+        comments: this.appointment.comments,
+        first_time: this.appointment.first_time
       };
       console.log(newEventData);
+      axios.post("/appointments", newEventData).then(function (response) {
+        console.log(response);
+
+        _this.closeModal();
+
+        _this.$emit("event-created");
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this.$emit("error");
+      });
       /* this.$api.appointments
         .create(newEventData)
         .then(({ data }) => {
@@ -21510,18 +21566,18 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
   },
   computed: {
     validEventData: function validEventData() {
-      return !!(this.appointment.start && this.appointment.user_id != "nobody");
+      return this.appointment.title != "" && this.appointment.user_id > 0;
     },
     dateStr: function dateStr() {
       return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.event.dateStr).locale("es").utc().format("LLLL");
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get("/doctors").then(function (response) {
       console.log(response.data);
-      _this.doctors = response.data;
+      _this2.doctors = response.data;
     })["catch"](function (error) {
       console.log(error);
     });
@@ -22021,13 +22077,7 @@ __webpack_require__.r(__webpack_exports__);
       return !!(this.event.start && this.patient.user_id != "nobody");
     },
   }, */
-  mounted: function mounted() {
-    new noty__WEBPACK_IMPORTED_MODULE_0___default.a({
-      text: "Event has been updated.",
-      timeout: 700,
-      type: "success"
-    }).show();
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -43794,14 +43844,195 @@ var render = function() {
                                                 _c("v-select", {
                                                   attrs: {
                                                     filterable: false,
-                                                    options: [
-                                                      "Canada",
-                                                      "United States"
-                                                    ]
+                                                    options: _vm.patients,
+                                                    label: "full_name"
+                                                  },
+                                                  on: { search: _vm.onSearch },
+                                                  model: {
+                                                    value:
+                                                      _vm.appointment.patient,
+                                                    callback: function($$v) {
+                                                      _vm.$set(
+                                                        _vm.appointment,
+                                                        "patient",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "appointment.patient"
                                                   }
                                                 })
                                               ],
                                               1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .first_time,
+                                                                    expression:
+                                                                      "appointment.first_time"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "first_time",
+                                                                  name:
+                                                                    "first_time",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .first_time
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .first_time,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .first_time
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .first_time,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "first_time",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "first_time",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "first_time",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "first_time"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Primera Vez"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -43872,7 +44103,7 @@ var render = function() {
                                                         attrs: {
                                                           disabled: "",
                                                           selected: "",
-                                                          value: "nobody"
+                                                          value: "0"
                                                         }
                                                       },
                                                       [

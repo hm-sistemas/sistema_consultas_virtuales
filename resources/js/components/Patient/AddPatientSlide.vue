@@ -288,12 +288,6 @@ export default {
     },
   }, */
 
-  mounted() {
-    new Noty({
-      text: `Event has been updated.`,
-      timeout: 700,
-      type: "success",
-    }).show();
-  },
+  mounted() {},
 };
 </script>

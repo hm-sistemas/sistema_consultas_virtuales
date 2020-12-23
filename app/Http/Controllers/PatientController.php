@@ -27,10 +27,15 @@ class PatientController extends Controller
     {
         $search = $request->name;
         $patients = Patient::whereLike(['full_name'], $search)
-            ->get()->take(20)
+            ->get()
         ;
 
-        return PatientResource::collection($patients);
+        return (PatientResource::collection($patients))->additional([
+            'meta' => [
+                'success' => true,
+                'message' => 'Pacientes han sido cargados.',
+            ],
+        ]);
     }
 
     /**

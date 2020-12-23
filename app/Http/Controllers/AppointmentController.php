@@ -24,7 +24,7 @@ class AppointmentController extends Controller
     {
         if (!auth()->user()->doctor) {
             return Appointment::whereBetween('date', [$request->start, $request->end])
-                ->with('user:id,full_name')
+                ->with('doctor:id,full_name')
                 ->get()
           ;
         }
@@ -52,6 +52,7 @@ class AppointmentController extends Controller
     public function store(AppointmentRequest $request)
     {
         $validated = $request->validated();
+        $validated['status'] = 0;
         $appointment = Appointment::create($validated);
 
         return (new AppointmentResource($appointment))->additional([
