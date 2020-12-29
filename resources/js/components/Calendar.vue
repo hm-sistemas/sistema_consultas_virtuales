@@ -5,7 +5,6 @@
       :options="calendarOptions"
       @eventDrop="handleEventDrop"
       @eventClick="handleEventClick"
-      @eventResize="eventResize"
       :editable="true"
       navLinks="true"
       timeZone="UTC"
@@ -83,7 +82,6 @@ export default {
         dateClick: self.handleDateClick,
         eventDrop: self.handleEventDrop,
         eventClick: self.handleEventClick,
-        eventResize: self.eventResize,
       },
       /* Full Calendar Options End */
     };
@@ -128,6 +126,7 @@ export default {
     handleEventClick(e) {
       this.current_event = e.event;
       this.show_event_details_modal = true;
+      console.log(this.current_event);
     },
 
     resetNewEventData() {
@@ -147,7 +146,7 @@ export default {
       }).show();
     },
 
-    eventResize(e) {
+    /* eventResize(e) {
       let updatedEventData = {
         start: e.event.start,
         end: e.event.end,
@@ -169,7 +168,7 @@ export default {
             type: "error",
           }).show();
         });
-    },
+    }, */
 
     rerenderCalendar() {
       this.$refs.fullCalendar.getApi().refetchEvents();

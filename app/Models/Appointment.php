@@ -18,6 +18,7 @@ class Appointment extends Model
         'first_time',
         'user_id',
         'patient_id',
+        'creator_id',
         'status',
     ];
 
@@ -60,5 +61,10 @@ class Appointment extends Model
     public function doctor()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'id', 'creator_id');
     }
 }

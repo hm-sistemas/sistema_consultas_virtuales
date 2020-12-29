@@ -21634,7 +21634,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -21689,8 +21688,7 @@ import "@fullcalendar/timegrid/main.css"; */
         navLinks: true,
         dateClick: self.handleDateClick,
         eventDrop: self.handleEventDrop,
-        eventClick: self.handleEventClick,
-        eventResize: self.eventResize
+        eventClick: self.handleEventClick
       }
       /* Full Calendar Options End */
 
@@ -21731,6 +21729,7 @@ import "@fullcalendar/timegrid/main.css"; */
     handleEventClick: function handleEventClick(e) {
       this.current_event = e.event;
       this.show_event_details_modal = true;
+      console.log(this.current_event);
     },
     resetNewEventData: function resetNewEventData() {
       this.new_event_details.start = null;
@@ -21747,27 +21746,30 @@ import "@fullcalendar/timegrid/main.css"; */
         type: "success"
       }).show();
     },
-    eventResize: function eventResize(e) {
-      var updatedEventData = {
+
+    /* eventResize(e) {
+      let updatedEventData = {
         start: e.event.start,
-        end: e.event.end
+        end: e.event.end,
       };
-      this.$api.appointments.update(e.event.id, updatedEventData).then(function (_ref2) {
-        var data = _ref2.data;
-        new noty__WEBPACK_IMPORTED_MODULE_7___default.a({
-          text: "Appointment duration updated.",
-          timeout: 1000,
-          type: "success"
-        }).show();
-      })["catch"](function (error) {
-        e.revert();
-        new noty__WEBPACK_IMPORTED_MODULE_7___default.a({
-          text: "Oooops, couldn't update appointment duration. Sorry.",
-          timeout: 1000,
-          type: "error"
-        }).show();
-      });
-    },
+      this.$api.appointments
+        .update(e.event.id, updatedEventData)
+        .then(({ data }) => {
+          new Noty({
+            text: `Appointment duration updated.`,
+            timeout: 1000,
+            type: "success",
+          }).show();
+        })
+        .catch((error) => {
+          e.revert();
+          new Noty({
+            text: `Oooops, couldn't update appointment duration. Sorry.`,
+            timeout: 1000,
+            type: "error",
+          }).show();
+        });
+    }, */
     rerenderCalendar: function rerenderCalendar() {
       this.$refs.fullCalendar.getApi().refetchEvents();
     }
@@ -44403,11 +44405,7 @@ var render = function() {
           navLinks: "true",
           timeZone: "UTC"
         },
-        on: {
-          eventDrop: _vm.handleEventDrop,
-          eventClick: _vm.handleEventClick,
-          eventResize: _vm.eventResize
-        }
+        on: { eventDrop: _vm.handleEventDrop, eventClick: _vm.handleEventClick }
       }),
       _vm._v(" "),
       _c("add-appointment-modal", {

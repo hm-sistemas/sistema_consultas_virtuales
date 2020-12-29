@@ -52,6 +52,7 @@ class AppointmentController extends Controller
     public function store(AppointmentRequest $request)
     {
         $validated = $request->validated();
+        $validated['creator_id'] = auth()->user()->id;
         $validated['status'] = 0;
         $appointment = Appointment::create($validated);
 
