@@ -23,15 +23,15 @@ class AppointmentController extends Controller
     public function filter(Request $request)
     {
         if (!auth()->user()->doctor) {
-            return Appointment::whereBetween('date', [$request->start, $request->end])
+            return AppointmentResource::collection(Appointment::whereBetween('date', [$request->start, $request->end])
                 ->with('doctor', 'patient')
-                ->get()
+                ->get())
           ;
         }
 
-        return Appointment::whereBetween('date', [$request->start, $request->end])
+        return AppointmentResource::collection(Appointment::whereBetween('date', [$request->start, $request->end])
             ->where('user_id', auth()->user()->id)
-            ->get()
+            ->get())
           ;
     }
 
@@ -115,9 +115,8 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Appointment $appointment)
     {
-        $appointment = Appointment::findOrFail($request['id']);
         $appointment->delete();
 
         return response()->json('Cita ha sido eliminada.', 204);

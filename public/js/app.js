@@ -22101,10 +22101,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
-/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs/locale/es */ "./node_modules/dayjs/locale/es.js");
-/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs_locale_es__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs/locale/es */ "./node_modules/dayjs/locale/es.js");
+/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dayjs_locale_es__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -22365,7 +22367,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 
@@ -22375,9 +22377,9 @@ var localizedFormat = __webpack_require__(/*! dayjs/plugin/localizedFormat */ ".
 
 var utc = __webpack_require__(/*! dayjs/plugin/utc */ "./node_modules/dayjs/plugin/utc.js");
 
-dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(utc);
-dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(localizedFormat);
-dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
+dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(utc);
+dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(localizedFormat);
+dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["show", "event"],
   watch: {
@@ -22437,6 +22439,32 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
 
         _this.$emit("error");
       });
+    },
+    deleteEvent: function deleteEvent() {
+      var n = new noty__WEBPACK_IMPORTED_MODULE_0___default.a({
+        text: 'Do you want to continue? <input id="example" type="text">',
+        buttons: [noty__WEBPACK_IMPORTED_MODULE_0___default.a.button("YES", "btn btn-success", function () {
+          console.log("button 1 clicked");
+        }, {
+          id: "button1",
+          "data-status": "ok"
+        }), noty__WEBPACK_IMPORTED_MODULE_0___default.a.button("NO", "btn btn-error", function () {
+          console.log("button 2 clicked");
+          n.close();
+        })]
+      });
+      n.show();
+      /* axios
+        .delete("/appointments/" + this.appointment.id)
+        .then((response) => {
+          console.log(response);
+          this.closeModal();
+          this.$emit("event-deleted");
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$emit("error");
+        }); */
     }
   },
   computed: {
@@ -22446,7 +22474,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
     dateStr: function dateStr() {
       if (this.show) {
         console.log(this.event.start);
-        return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.event.start).locale("es").utc().format("LLLL");
+        return dayjs__WEBPACK_IMPORTED_MODULE_1___default()(this.event.start).locale("es").utc().format("LLLL");
       } else {
         return "";
       }
@@ -46079,7 +46107,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("\n            Cancelar\n          ")]
+                        [_vm._v("\n            Cerrar\n          ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -46090,7 +46118,7 @@ var render = function() {
                           attrs: { type: "button" },
                           on: {
                             click: function($event) {
-                              return _vm.closeModal()
+                              return _vm.deleteEvent()
                             }
                           }
                         },

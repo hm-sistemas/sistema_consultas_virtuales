@@ -242,12 +242,11 @@
               type="button"
               class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             >
-              Cancelar
+              Cerrar
             </button>
             <button
-              @click="closeModal()"
+              @click="deleteEvent()"
               type="button"
-
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
             >
               Eliminar
@@ -260,6 +259,7 @@
 </template>
 
 <script>
+import Noty from "noty";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 var customParseFormat = require("dayjs/plugin/customParseFormat");
@@ -311,19 +311,55 @@ export default {
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
-        id: this.appointment.id
+        id: this.appointment.id,
       };
 
-      console.log("new data: ",newEventData);
+      console.log("new data: ", newEventData);
 
-      axios.patch("/appointments/" + newEventData.id, newEventData).then((response) => {
-        console.log(response);
-        this.closeModal();
-        this.$emit("event-updated");
-      }).catch((error) => {
-        console.log(error);
-        this.$emit("error");
-      })
+      axios
+        .patch("/appointments/" + newEventData.id, newEventData)
+        .then((response) => {
+          console.log(response);
+          this.closeModal();
+          this.$emit("event-updated");
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$emit("error");
+        });
+    },
+    deleteEvent() {
+      var n = new Noty({
+        text: 'Do you want to continue? <input id="example" type="text">',
+        buttons: [
+          Noty.button(
+            "YES",
+            "btn btn-success",
+            function () {
+              console.log("button 1 clicked");
+            },
+            { id: "button1", "data-status": "ok" }
+          ),
+
+          Noty.button("NO", "btn btn-error", function () {
+            console.log("button 2 clicked");
+            n.close();
+          }),
+        ],
+      });
+      n.show();
+
+      /* axios
+        .delete("/appointments/" + this.appointment.id)
+        .then((response) => {
+          console.log(response);
+          this.closeModal();
+          this.$emit("event-deleted");
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$emit("error");
+        }); */
     },
   },
 
