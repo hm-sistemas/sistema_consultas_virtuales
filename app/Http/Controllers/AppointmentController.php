@@ -24,7 +24,7 @@ class AppointmentController extends Controller
     {
         if (!auth()->user()->doctor) {
             return Appointment::whereBetween('date', [$request->start, $request->end])
-                ->with('doctor:id,full_name')
+                ->with('doctor', 'patient')
                 ->get()
           ;
         }

@@ -21470,6 +21470,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -21487,10 +21489,10 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
   data: function data() {
     return {
       appointment: {
-        description: null,
+        description: "",
         user_id: 0,
         patient: null,
-        comments: null,
+        comments: "",
         title: "",
         first_time: false
       },
@@ -21566,7 +21568,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
   },
   computed: {
     validEventData: function validEventData() {
-      return this.appointment.title != "" && this.appointment.user_id > 0;
+      return this.appointment.title != "" && this.appointment.user_id > 0 && this.appointment.patient;
     },
     dateStr: function dateStr() {
       return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.event.dateStr).locale("es").utc().format("LLLL");
@@ -21603,8 +21605,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fullcalendar/core/locales/es */ "./node_modules/@fullcalendar/core/locales/es.js");
 /* harmony import */ var _fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_fullcalendar_core_locales_es__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _AddAppointmentModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AddAppointmentModal */ "./resources/js/components/AddAppointmentModal.vue");
-/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
-/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ShowAppointmentModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ShowAppointmentModal */ "./resources/js/components/ShowAppointmentModal.vue");
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_8__);
 //
 //
 //
@@ -21641,7 +21644,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* import ShowAppointmentModal from "./ShowAppointmentModal"; */
 
 
 /* import "@fullcalendar/core/main.css";
@@ -21652,10 +21654,10 @@ import "@fullcalendar/timegrid/main.css"; */
   name: "Calendar",
   components: {
     FullCalendar: _fullcalendar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AddAppointmentModal: _AddAppointmentModal__WEBPACK_IMPORTED_MODULE_6__["default"]
-    /* ShowAppointmentModal */
-
+    AddAppointmentModal: _AddAppointmentModal__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ShowAppointmentModal: _ShowAppointmentModal__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
+  props: ["isDoctor"],
   data: function data() {
     var self = this;
     return {
@@ -21684,7 +21686,8 @@ import "@fullcalendar/timegrid/main.css"; */
           url: "/appointments/filter",
           weekends: true
         },
-        editable: true,
+
+        /* editable: true, */
         navLinks: true,
         dateClick: self.handleDateClick,
         eventDrop: self.handleEventDrop,
@@ -21696,40 +21699,45 @@ import "@fullcalendar/timegrid/main.css"; */
   },
   methods: {
     handleDateClick: function handleDateClick(e) {
-      this.new_event_modal_open = true;
-      this.new_event_start = e.dateStr;
-      console.log(e);
-      this.new_event_details.dateStr = e.dateStr;
-      this.new_event_details.date = e.date;
+      if (!this.isDoctor) {
+        this.new_event_modal_open = true;
+        this.new_event_start = e.dateStr;
+        console.log(e);
+        this.new_event_details.dateStr = e.dateStr;
+        this.new_event_details.date = e.date;
+      }
       /* dayjs(e.dateStr, "YYYY-MM-DD", true)
           .locale("es")
           .format("dddd, LL"); */
+
     },
     handleEventDrop: function handleEventDrop(e) {
-      var updatedEventData = {
+      /* let updatedEventData = {
         start: e.event.start,
-        end: e.event.end
+        end: e.event.end,
       };
-      this.$api.appointments.update(e.event.id, updatedEventData).then(function (_ref) {
-        var data = _ref.data;
-        new noty__WEBPACK_IMPORTED_MODULE_7___default.a({
-          text: "Event has been updated.",
-          timeout: 700,
-          type: "success"
-        }).show();
-      })["catch"](function (error) {
-        e.revert();
-        new noty__WEBPACK_IMPORTED_MODULE_7___default.a({
-          text: "Oops, something bad happened while updating your event.",
-          timeout: 1000,
-          type: "error"
-        }).show();
-      });
+      this.$api.appointments
+        .update(e.event.id, updatedEventData)
+        .then(({ data }) => {
+          new Noty({
+            text: `Event has been updated.`,
+            timeout: 700,
+            type: "success",
+          }).show();
+        })
+        .catch((error) => {
+          e.revert();
+          new Noty({
+            text: `Oops, something bad happened while updating your event.`,
+            timeout: 1000,
+            type: "error",
+          }).show();
+        }); */
     },
     handleEventClick: function handleEventClick(e) {
       this.current_event = e.event;
       this.show_event_details_modal = true;
-      console.log(this.current_event);
+      console.log(this.current_event.extendedProps);
     },
     resetNewEventData: function resetNewEventData() {
       this.new_event_details.start = null;
@@ -21740,8 +21748,8 @@ import "@fullcalendar/timegrid/main.css"; */
       this.rerenderCalendar();
       this.new_event_modal_open = false;
       this.resetNewEventData();
-      new noty__WEBPACK_IMPORTED_MODULE_7___default.a({
-        text: "Appointment has been created.",
+      new noty__WEBPACK_IMPORTED_MODULE_8___default.a({
+        text: "Cita registrada exitosamente.",
         timeout: 1000,
         type: "success"
       }).show();
@@ -22080,6 +22088,376 @@ __webpack_require__.r(__webpack_exports__);
     },
   }, */
   mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ShowAppointmentModal.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ShowAppointmentModal.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dayjs/locale/es */ "./node_modules/dayjs/locale/es.js");
+/* harmony import */ var dayjs_locale_es__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dayjs_locale_es__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var customParseFormat = __webpack_require__(/*! dayjs/plugin/customParseFormat */ "./node_modules/dayjs/plugin/customParseFormat.js");
+
+var localizedFormat = __webpack_require__(/*! dayjs/plugin/localizedFormat */ "./node_modules/dayjs/plugin/localizedFormat.js");
+
+var utc = __webpack_require__(/*! dayjs/plugin/utc */ "./node_modules/dayjs/plugin/utc.js");
+
+dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(utc);
+dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(localizedFormat);
+dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["show", "event"],
+  watch: {
+    event: {
+      handler: function handler(newVal, oldVal) {
+        this.appointment.first_time = newVal.extendedProps.first_time;
+        this.appointment.description = newVal.extendedProps.description;
+        this.appointment.user_id = newVal.extendedProps.user_id;
+        this.appointment.patient = newVal.extendedProps.patient;
+        this.appointment.title = newVal.title;
+        this.appointment.comments = newVal.extendedProps.comments;
+        this.appointment.id = newVal.id;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      appointment: {
+        description: "",
+        user_id: 0,
+        patient: null,
+        comments: "",
+        title: "",
+        first_time: false,
+        id: 0
+      }
+    };
+  },
+  methods: {
+    closeModal: function closeModal() {
+      this.appointment.description = null;
+      this.appointment.user_id = "nobody";
+      this.appointment.comments = null;
+      this.$emit("close");
+    },
+    saveEvent: function saveEvent() {
+      var _this = this;
+
+      var newEventData = {
+        description: this.appointment.description,
+        user_id: this.appointment.user_id,
+        title: this.appointment.title,
+        patient_id: this.appointment.patient.id,
+        comments: this.appointment.comments,
+        first_time: this.appointment.first_time,
+        id: this.appointment.id
+      };
+      console.log("new data: ", newEventData);
+      axios.patch("/appointments/" + newEventData.id, newEventData).then(function (response) {
+        console.log(response);
+
+        _this.closeModal();
+
+        _this.$emit("event-updated");
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this.$emit("error");
+      });
+    }
+  },
+  computed: {
+    validEventData: function validEventData() {
+      return this.appointment.title != "" && this.appointment.user_id > 0;
+    },
+    dateStr: function dateStr() {
+      if (this.show) {
+        console.log(this.event.start);
+        return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(this.event.start).locale("es").utc().format("LLLL");
+      } else {
+        return "";
+      }
+    },
+    patientName: function patientName() {
+      return this.show ? this.event.extendedProps.patient.full_name : "";
+    },
+    doctorName: function doctorName() {
+      return this.show ? this.event.extendedProps.doctor.full_name : "";
+    }
+  }
 });
 
 /***/ }),
@@ -44336,7 +44714,10 @@ var render = function() {
                         {
                           staticClass:
                             "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
-                          attrs: { type: "button" },
+                          attrs: {
+                            type: "button",
+                            disabled: !_vm.validEventData
+                          },
                           on: {
                             click: function($event) {
                               return _vm.saveEvent()
@@ -44358,7 +44739,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("\n            Cancelar\n          ")]
+                        [_vm._v("\n            Cerrar\n          ")]
                       )
                     ]
                   )
@@ -44413,6 +44794,17 @@ var render = function() {
         on: {
           close: _vm.resetNewEventData,
           "event-created": _vm.newEventCreated
+        }
+      }),
+      _vm._v(" "),
+      _c("show-appointment-modal", {
+        attrs: { show: _vm.show_event_details_modal, event: _vm.current_event },
+        on: {
+          close: function($event) {
+            _vm.show_event_details_modal = false
+          },
+          "event-deleted": _vm.rerenderCalendar,
+          "event-updated": _vm.rerenderCalendar
         }
       })
     ],
@@ -45057,6 +45449,664 @@ var render = function() {
       ]
     )
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ShowAppointmentModal.vue?vue&type=template&id=798462d6&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ShowAppointmentModal.vue?vue&type=template&id=798462d6& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+      ],
+      staticClass: "fixed z-10 inset-0 overflow-y-auto"
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+        },
+        [
+          _c(
+            "transition",
+            {
+              attrs: {
+                "enter-active-class": "ease-out duration-300",
+                "enter-class": "opacity-0",
+                "enter-to-class": "opacity-100",
+                "leave-active-class": "ease-in duration-200",
+                "leave-class": "opacity-100",
+                "leave-to-class": "opacity-0"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.show,
+                      expression: "show"
+                    }
+                  ],
+                  staticClass: "fixed inset-0 transition-opacity",
+                  attrs: { "aria-hidden": "true" }
+                },
+                [
+                  _c("div", {
+                    staticClass: "absolute inset-0 bg-gray-500 opacity-75"
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "hidden sm:inline-block sm:align-middle sm:h-screen",
+              attrs: { "aria-hidden": "true" }
+            },
+            [_vm._v("​")]
+          ),
+          _vm._v(" "),
+          _c(
+            "transition",
+            {
+              attrs: {
+                "enter-active-class": "ease-out duration-300",
+                "enter-class":
+                  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
+                "enter-to-class": "opacity-100 translate-y-0 sm:scale-100",
+                "leave-active-class": "ease-in duration-200",
+                "leave-class": "opacity-100 translate-y-0 sm:scale-100",
+                "leave-to-class":
+                  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.show,
+                      expression: "show"
+                    }
+                  ],
+                  staticClass:
+                    "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                  attrs: {
+                    role: "dialog",
+                    "aria-modal": "true",
+                    "aria-labelledby": "modal-headline"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4" },
+                    [
+                      _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                          },
+                          [
+                            _c(
+                              "h3",
+                              {
+                                staticClass:
+                                  "text-lg leading-6 font-medium text-gray-900",
+                                attrs: { id: "modal-headline" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                Detalles\n              "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "h5",
+                              {
+                                staticClass:
+                                  "mt-3 text-left sm:mt-0 sm:ml-4 sm:text-left font-medium text-green-400"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(_vm.dateStr) +
+                                    "\n              "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "mt-5 md:mt-0 md:col-span-2" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "overflow-hidden sm:rounded-md"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "px-4 py-5 bg-white sm:p-6"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "grid grid-cols-6 gap-6"
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "user_id" }
+                                                  },
+                                                  [_vm._v("Paciente")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "dd",
+                                                  {
+                                                    staticClass:
+                                                      "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                          " +
+                                                        _vm._s(
+                                                          _vm.patientName
+                                                        ) +
+                                                        "\n                        "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .first_time,
+                                                                    expression:
+                                                                      "appointment.first_time"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "first_time",
+                                                                  name:
+                                                                    "first_time",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .first_time
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .first_time,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .first_time
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .first_time,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "first_time",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "first_time",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "first_time",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "first_time"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Primera Vez"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "user_id" }
+                                                  },
+                                                  [_vm._v("Doctor")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "dd",
+                                                  {
+                                                    staticClass:
+                                                      "mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                          " +
+                                                        _vm._s(_vm.doctorName) +
+                                                        "\n                        "
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "title" }
+                                                  },
+                                                  [_vm._v("Motivo")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.appointment.title,
+                                                      expression:
+                                                        "appointment.title"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                  attrs: {
+                                                    type: "text",
+                                                    name: "title",
+                                                    id: "title"
+                                                  },
+                                                  domProps: {
+                                                    value: _vm.appointment.title
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.appointment,
+                                                        "title",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: {
+                                                      for: "description"
+                                                    }
+                                                  },
+                                                  [_vm._v("Detalles")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("textarea", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.appointment
+                                                          .description,
+                                                      expression:
+                                                        "appointment.description"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                  attrs: {
+                                                    rows: "4",
+                                                    cols: "50",
+                                                    name: "description",
+                                                    id: "description"
+                                                  },
+                                                  domProps: {
+                                                    value:
+                                                      _vm.appointment
+                                                        .description
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.appointment,
+                                                        "description",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "comments" }
+                                                  },
+                                                  [_vm._v("Notas")]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.appointment
+                                                          .comments,
+                                                      expression:
+                                                        "appointment.comments"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                  attrs: {
+                                                    type: "text",
+                                                    name: "comments",
+                                                    id: "comments"
+                                                  },
+                                                  domProps: {
+                                                    value:
+                                                      _vm.appointment.comments
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.appointment,
+                                                        "comments",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.saveEvent()
+                            }
+                          }
+                        },
+                        [_vm._v("\n            Guardar\n          ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.closeModal()
+                            }
+                          }
+                        },
+                        [_vm._v("\n            Cancelar\n          ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.closeModal()
+                            }
+                          }
+                        },
+                        [_vm._v("\n            Eliminar\n          ")]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -57529,6 +58579,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPatientSlide_vue_vue_type_template_id_6e666ba8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddPatientSlide_vue_vue_type_template_id_6e666ba8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ShowAppointmentModal.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ShowAppointmentModal.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ShowAppointmentModal_vue_vue_type_template_id_798462d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowAppointmentModal.vue?vue&type=template&id=798462d6& */ "./resources/js/components/ShowAppointmentModal.vue?vue&type=template&id=798462d6&");
+/* harmony import */ var _ShowAppointmentModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowAppointmentModal.vue?vue&type=script&lang=js& */ "./resources/js/components/ShowAppointmentModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ShowAppointmentModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ShowAppointmentModal_vue_vue_type_template_id_798462d6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ShowAppointmentModal_vue_vue_type_template_id_798462d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ShowAppointmentModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ShowAppointmentModal.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ShowAppointmentModal.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowAppointmentModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ShowAppointmentModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ShowAppointmentModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowAppointmentModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ShowAppointmentModal.vue?vue&type=template&id=798462d6&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ShowAppointmentModal.vue?vue&type=template&id=798462d6& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowAppointmentModal_vue_vue_type_template_id_798462d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ShowAppointmentModal.vue?vue&type=template&id=798462d6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ShowAppointmentModal.vue?vue&type=template&id=798462d6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowAppointmentModal_vue_vue_type_template_id_798462d6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowAppointmentModal_vue_vue_type_template_id_798462d6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

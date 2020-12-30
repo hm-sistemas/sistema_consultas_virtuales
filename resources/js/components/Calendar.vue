@@ -17,13 +17,13 @@
       @event-created="newEventCreated"
     />
 
-    <!-- <show-appointment-modal
-            :show="show_event_details_modal"
-            :event="current_event"
-            @close="show_event_details_modal = false"
-            @event-deleted="rerenderCalendar"
-            @event-updated="rerenderCalendar"
-        /> -->
+    <show-appointment-modal
+      :show="show_event_details_modal"
+      :event="current_event"
+      @close="show_event_details_modal = false"
+      @event-deleted="rerenderCalendar"
+      @event-updated="rerenderCalendar"
+    />
   </div>
 </template>
 
@@ -35,7 +35,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import esLocale from "@fullcalendar/core/locales/es";
 import AddAppointmentModal from "./AddAppointmentModal";
-/* import ShowAppointmentModal from "./ShowAppointmentModal"; */
+import ShowAppointmentModal from "./ShowAppointmentModal";
 import Noty from "noty";
 
 /* import "@fullcalendar/core/main.css";
@@ -47,8 +47,9 @@ export default {
   components: {
     FullCalendar,
     AddAppointmentModal,
-    /* ShowAppointmentModal */
+    ShowAppointmentModal,
   },
+  props: ["isDoctor"],
   data() {
     var self = this;
     return {
@@ -77,7 +78,7 @@ export default {
           url: "/appointments/filter",
           weekends: true,
         },
-        editable: true,
+        /* editable: true, */
         navLinks: true,
         dateClick: self.handleDateClick,
         eventDrop: self.handleEventDrop,
@@ -89,18 +90,21 @@ export default {
 
   methods: {
     handleDateClick(e) {
-      this.new_event_modal_open = true;
-      this.new_event_start = e.dateStr;
-      console.log(e);
-      this.new_event_details.dateStr = e.dateStr;
-      this.new_event_details.date = e.date;
+      if (!this.isDoctor) {
+        this.new_event_modal_open = true;
+        this.new_event_start = e.dateStr;
+        console.log(e);
+        this.new_event_details.dateStr = e.dateStr;
+        this.new_event_details.date = e.date;
+      }
+
       /* dayjs(e.dateStr, "YYYY-MM-DD", true)
           .locale("es")
           .format("dddd, LL"); */
     },
 
     handleEventDrop(e) {
-      let updatedEventData = {
+      /* let updatedEventData = {
         start: e.event.start,
         end: e.event.end,
       };
@@ -120,13 +124,13 @@ export default {
             timeout: 1000,
             type: "error",
           }).show();
-        });
+        }); */
     },
 
     handleEventClick(e) {
       this.current_event = e.event;
       this.show_event_details_modal = true;
-      console.log(this.current_event);
+      console.log(this.current_event.extendedProps);
     },
 
     resetNewEventData() {
@@ -140,7 +144,7 @@ export default {
       this.new_event_modal_open = false;
       this.resetNewEventData();
       new Noty({
-        text: `Appointment has been created.`,
+        text: `Cita registrada exitosamente.`,
         timeout: 1000,
         type: "success",
       }).show();

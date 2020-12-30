@@ -25,9 +25,6 @@ class UpdateAppointmentRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'start' => 'required',
-            'end' => 'required',
-            'date' => 'required|date',
             'user_id' => 'required',
             'patient_id' => 'required',
             'first_time' => 'required',

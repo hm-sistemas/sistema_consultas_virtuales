@@ -60,7 +60,7 @@ class Appointment extends Model
 
     public function doctor()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
     public function user()

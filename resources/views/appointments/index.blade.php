@@ -6,9 +6,12 @@
                     {{ __('Citas') }}
                 </h2>
             </div>
+            @if (!auth()->user()->doctor)
             <div class="place-self-end">
                 <add-patient-slide />
             </div>
+            @endif
+
 
         </div>
 
@@ -22,7 +25,7 @@
                     Consultas virtuales
                 </div>
             </div> --}}
-            <calendar />
+            <calendar :is-doctor="{{ auth()->user()->doctor }}" />
         </div>
     </div>
 </x-app-layout>

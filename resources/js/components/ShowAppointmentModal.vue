@@ -86,13 +86,18 @@
                             class="block text-sm font-medium text-gray-700"
                             >Paciente</label
                           >
-                          <v-select
+                          <dd
+                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                          >
+                            {{ patientName }}
+                          </dd>
+                          <!-- <v-select
                             :filterable="false"
                             :options="patients"
                             @search="onSearch"
                             label="full_name"
                             v-model="appointment.patient"
-                          ></v-select>
+                          ></v-select> -->
                         </div>
                         <div class="col-span-6">
                           <fieldset>
@@ -131,7 +136,12 @@
                             class="block text-sm font-medium text-gray-700"
                             >Doctor</label
                           >
-                          <select
+                          <dd
+                            class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
+                          >
+                            {{ doctorName }}
+                          </dd>
+                          <!-- <select
                             id="user_id"
                             name="user_id"
                             v-model="appointment.user_id"
@@ -147,7 +157,7 @@
                             >
                               {{ doctor.full_name }}
                             </option>
-                          </select>
+                          </select> -->
                         </div>
                         <!-- <div class="col-span-6">
                           <label
@@ -234,6 +244,14 @@
             >
               Cancelar
             </button>
+            <button
+              @click="closeModal()"
+              type="button"
+
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Eliminar
+            </button>
           </div>
         </div>
       </transition>
@@ -252,17 +270,29 @@ dayjs.extend(localizedFormat);
 dayjs.extend(customParseFormat);
 export default {
   props: ["show", "event"],
+  watch: {
+    event: {
+      handler: function (newVal, oldVal) {
+        this.appointment.first_time = newVal.extendedProps.first_time;
+        this.appointment.description = newVal.extendedProps.description;
+        this.appointment.user_id = newVal.extendedProps.user_id;
+        this.appointment.patient = newVal.extendedProps.patient;
+        this.appointment.title = newVal.title;
+        this.appointment.comments = newVal.extendedProps.comments;
+        this.appointment.id = newVal.id;
+      },
+    },
+  },
   data: () => ({
     appointment: {
-      description: null,
+      description: "",
       user_id: 0,
       patient: null,
-      comments: null,
+      comments: "",
       title: "",
       first_time: false,
+      id: 0,
     },
-    doctors: [],
-    patients: [],
   }),
 
   methods: {
@@ -273,61 +303,27 @@ export default {
       this.$emit("close");
     },
 
-    onSearch(search, loading) {
-      if (search.length) {
-        loading(true);
-        this.search(loading, search, this);
-      }
-    },
-    search: _.debounce((loading, search, vm) => {
-      axios
-        .get("/patients/filter", { params: { name: search } })
-        .then((response) => {
-          console.log("PATIENTS", response.data);
-          vm.patients = response.data.data;
-          console.log(vm.patients);
-          loading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 350),
-
     saveEvent() {
-      let date = dayjs(this.event.date).format("YYYY-MM-DD");
-      let end = dayjs(this.event.date).add(1, "hour");
       let newEventData = {
-        start: this.event.dateStr,
-        end: end.toISOString(),
-        date: date,
         description: this.appointment.description,
         user_id: this.appointment.user_id,
         title: this.appointment.title,
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
+        id: this.appointment.id
       };
 
-      console.log(newEventData);
+      console.log("new data: ",newEventData);
 
-      axios.post("/appointments", newEventData).then((response) => {
+      axios.patch("/appointments/" + newEventData.id, newEventData).then((response) => {
         console.log(response);
         this.closeModal();
-        this.$emit("event-created");
+        this.$emit("event-updated");
       }).catch((error) => {
         console.log(error);
         this.$emit("error");
       })
-
-      /* this.$api.appointments
-        .create(newEventData)
-        .then(({ data }) => {
-          this.closeModal();
-          this.$emit("event-created");
-        })
-        .catch((error) => {
-          this.$emit("error");
-        }); */
     },
   },
 
@@ -336,20 +332,19 @@ export default {
       return this.appointment.title != "" && this.appointment.user_id > 0;
     },
     dateStr() {
-      return dayjs(this.event.dateStr).locale("es").utc().format("LLLL");
+      if (this.show) {
+        console.log(this.event.start);
+        return dayjs(this.event.start).locale("es").utc().format("LLLL");
+      } else {
+        return "";
+      }
     },
-  },
-
-  mounted() {
-    axios
-      .get("/doctors")
-      .then((response) => {
-        console.log(response.data);
-        this.doctors = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    patientName() {
+      return this.show ? this.event.extendedProps.patient.full_name : "";
+    },
+    doctorName() {
+      return this.show ? this.event.extendedProps.doctor.full_name : "";
+    },
   },
 };
 </script>

@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/appointments', 'AppointmentController@index')->name('appointments');
     Route::get('/appointments/filter', 'AppointmentController@filter')->name('appointments.filter');
     Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');
-    Route::patch('/appointments/{appointment}/edit', 'AppointmentController@update')->name('appointments.update');
+    Route::patch('/appointments/{appointment}', 'AppointmentController@update')->name('appointments.update');
     Route::delete('/appointments/{appointment}', 'AppointmentController@destroy')->name('appointments.destroy');
 
     Route::get('/doctors', 'DoctorController@doctors')->name('doctors');
