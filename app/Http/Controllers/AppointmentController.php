@@ -24,12 +24,13 @@ class AppointmentController extends Controller
     {
         if (!auth()->user()->doctor) {
             return AppointmentResource::collection(Appointment::whereBetween('date', [$request->start, $request->end])
-                ->with('doctor', 'patient')
+                ->with('doctor', 'patient', 'user')
                 ->get())
           ;
         }
 
         return AppointmentResource::collection(Appointment::whereBetween('date', [$request->start, $request->end])
+            ->with('doctor', 'patient', 'user')
             ->where('user_id', auth()->user()->id)
             ->get())
           ;

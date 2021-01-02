@@ -65,6 +65,6 @@ class Appointment extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'id', 'creator_id');
+        return $this->belongsTo('App\Models\User', 'creator_id', 'id');
     }
 }

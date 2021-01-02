@@ -22462,9 +22462,9 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
       handler: function handler(newVal, oldVal) {
         this.appointment.first_time = newVal.extendedProps.first_time;
         this.appointment.description = newVal.extendedProps.description;
-        this.appointment.user_id = newVal.extendedProps.user_id;
+        this.appointment.user_id = newVal.extendedProps.doctor.id;
         this.appointment.patient = newVal.extendedProps.patient;
-        this.appointment.title = newVal.title;
+        this.appointment.title = newVal.extendedProps.title2;
         this.appointment.comments = newVal.extendedProps.comments;
         this.appointment.id = newVal.id;
       }
@@ -46182,21 +46182,6 @@ var render = function() {
                           }
                         },
                         [_vm._v("\n            Cerrar\n          ")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteEvent()
-                            }
-                          }
-                        },
-                        [_vm._v("\n            Eliminar\n          ")]
                       )
                     ]
                   )
