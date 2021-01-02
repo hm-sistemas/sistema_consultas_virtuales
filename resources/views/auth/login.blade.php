@@ -54,7 +54,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </span>
-                    {{ __('Acceder') }}
+                    {{ __('Ingresar') }}
                 </button>
             </div>
         </form>
