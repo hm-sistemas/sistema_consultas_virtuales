@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('titles')->nullable();
             $table->string('cedulas')->nullable();
-
+            $table->tinyInteger('gender')->default(0);
             $table->boolean('doctor')->default(0);
             $table->tinyInteger('type')->default(0);
             $table->rememberToken();

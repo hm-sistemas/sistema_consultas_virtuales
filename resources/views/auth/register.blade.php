@@ -44,6 +44,15 @@
             </div>
 
             <div class="mt-4">
+                <label for="gender" class="block text-sm font-medium text-gray-700">Género</label>
+                <select id="gender" name="gender"
+                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option selected aria-selected="true" value="0">Masculino</option>
+                    <option value="1">Femenino</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
                 <label for="type" class="block text-sm font-medium text-gray-700">Tipo</label>
                 <select id="type" name="type"
                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -52,6 +61,7 @@
                     <option value="1">Administrador</option>
                 </select>
             </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Contraseña')" />
@@ -91,7 +101,7 @@
                     <x-label for="titles" :value="__('Títulos')" />
 
                     <x-input id="titles" class="block mt-1 w-full" type="text" name="titles" :value="old('titles')"
-                        placeholder="Dr., Dra." />
+                        placeholder="Dentista, Medico, etc..." />
                 </div>
             </fieldset>
 

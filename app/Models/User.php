@@ -56,10 +56,32 @@ class User extends Authenticatable
                 return 'Normal';
 
                 break;
+
             case 1:
                 return 'Administrador';
 
                 break;
+
+            default:
+                // code...
+                break;
+        }
+    }
+
+    public function title()
+    {
+        //only for doctors
+        switch ($this->gender) {
+            case 0:
+                return 'Dr.';
+
+                break;
+
+            case 1:
+                return 'Dra.';
+
+                break;
+
             default:
                 // code...
                 break;
