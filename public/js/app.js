@@ -21547,6 +21547,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -21569,7 +21593,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
         patient: null,
         comments: "",
         title: "",
-        first_time: false
+        first_time: false,
+        service: 0
       },
       doctors: [],
       patients: []
@@ -21616,7 +21641,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
         title: this.appointment.title,
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
-        first_time: this.appointment.first_time
+        first_time: this.appointment.first_time,
+        service: this.appointment.service
       };
       console.log(newEventData);
       axios.post("/appointments", newEventData).then(function (response) {
@@ -21630,15 +21656,6 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
 
         _this.$emit("error");
       });
-      /* this.$api.appointments
-        .create(newEventData)
-        .then(({ data }) => {
-          this.closeModal();
-          this.$emit("event-created");
-        })
-        .catch((error) => {
-          this.$emit("error");
-        }); */
     }
   },
   computed: {
@@ -22442,6 +22459,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -22466,6 +22507,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
         this.appointment.patient = newVal.extendedProps.patient;
         this.appointment.title = newVal.extendedProps.title2;
         this.appointment.comments = newVal.extendedProps.comments;
+        this.appointment.service = newVal.extendedProps.service2;
         this.appointment.id = newVal.id;
       }
     }
@@ -22479,7 +22521,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
         comments: "",
         title: "",
         first_time: false,
-        id: 0
+        id: 0,
+        service: 0
       }
     };
   },
@@ -22500,6 +22543,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
+        service: this.appointment.service,
         id: this.appointment.id
       };
       console.log("new data: ", newEventData);
@@ -44690,7 +44734,7 @@ var render = function() {
                                                       for: "description"
                                                     }
                                                   },
-                                                  [_vm._v("Detalles")]
+                                                  [_vm._v("Síntomas")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c("textarea", {
@@ -44733,6 +44777,111 @@ var render = function() {
                                                     }
                                                   }
                                                 })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "user_id" }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "Videoconferencia por"
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.appointment
+                                                            .service,
+                                                        expression:
+                                                          "appointment.service"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                                    attrs: {
+                                                      id: "service",
+                                                      name: "service"
+                                                    },
+                                                    on: {
+                                                      change: function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.appointment,
+                                                          "service",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: {
+                                                          selected: "",
+                                                          value: "0"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            Telnor\n                          "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      { attrs: { value: "1" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            WhatsApp\n                          "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      { attrs: { value: "2" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            Zoom\n                          "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
                                               ]
                                             ),
                                             _vm._v(" "),
@@ -46033,7 +46182,7 @@ var render = function() {
                                                       for: "description"
                                                     }
                                                   },
-                                                  [_vm._v("Detalles")]
+                                                  [_vm._v("Síntomas")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c("textarea", {
@@ -46076,6 +46225,106 @@ var render = function() {
                                                     }
                                                   }
                                                 })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "block text-sm font-medium text-gray-700",
+                                                    attrs: { for: "user_id" }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "Videoconferencia por"
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.appointment
+                                                            .service,
+                                                        expression:
+                                                          "appointment.service"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                                    attrs: {
+                                                      id: "service",
+                                                      name: "service"
+                                                    },
+                                                    on: {
+                                                      change: function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.appointment,
+                                                          "service",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "option",
+                                                      { attrs: { value: "0" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            Telnor\n                          "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      { attrs: { value: "1" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            WhatsApp\n                          "
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      { attrs: { value: "2" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                            Zoom\n                          "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
                                               ]
                                             ),
                                             _vm._v(" "),

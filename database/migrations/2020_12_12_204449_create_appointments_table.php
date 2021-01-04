@@ -25,6 +25,8 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->boolean('first_time')->default(0);
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('service')->default(0);
+
             $table->date('date');
             $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
 

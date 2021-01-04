@@ -20,6 +20,7 @@ class Appointment extends Model
         'patient_id',
         'creator_id',
         'status',
+        'service',
     ];
 
     protected $dates = ['date', 'start', 'end'];
@@ -44,6 +45,30 @@ class Appointment extends Model
 
             case 3:
                 return 'Otro';
+
+                break;
+
+            default:
+                // code...
+                break;
+        }
+    }
+
+    public function service()
+    {
+        switch ($this->service) {
+            case 0:
+                return 'Telnor';
+
+                break;
+
+            case 1:
+                return 'WhatsApp';
+
+                break;
+
+            case 2:
+                return 'Zoom';
 
                 break;
 

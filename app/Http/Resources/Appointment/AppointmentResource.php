@@ -23,6 +23,8 @@ class AppointmentResource extends JsonResource
             'comments' => $this->comments,
             'status' => $this->status(),
             'status2' => $this->status,
+            'service' => $this->service(),
+            'service2' => $this->service,
             'date' => $this->date,
             'date2' => $this->date->format('Y-m-d'),
             'start' => $this->start,

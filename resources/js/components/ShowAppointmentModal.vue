@@ -196,7 +196,7 @@
                           <label
                             for="description"
                             class="block text-sm font-medium text-gray-700"
-                            >Detalles</label
+                            >Síntomas</label
                           >
                           <textarea
                             rows="4"
@@ -206,6 +206,30 @@
                             v-model="appointment.description"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                           />
+                        </div>
+
+                        <div class="col-span-6">
+                          <label
+                            for="user_id"
+                            class="block text-sm font-medium text-gray-700"
+                            >Videoconferencia por</label
+                          >
+                          <select
+                            id="service"
+                            name="service"
+                            v-model="appointment.service"
+                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          >
+                            <option value="0">
+                              Telnor
+                            </option>
+                            <option value="1">
+                              WhatsApp
+                            </option>
+                            <option value="2">
+                              Zoom
+                            </option>
+                          </select>
                         </div>
 
                         <div class="col-span-6">
@@ -279,6 +303,7 @@ export default {
         this.appointment.patient = newVal.extendedProps.patient;
         this.appointment.title = newVal.extendedProps.title2;
         this.appointment.comments = newVal.extendedProps.comments;
+         this.appointment.service = newVal.extendedProps.service2;
         this.appointment.id = newVal.id;
       },
     },
@@ -292,6 +317,7 @@ export default {
       title: "",
       first_time: false,
       id: 0,
+      service: 0,
     },
   }),
 
@@ -311,6 +337,7 @@ export default {
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
+        service: this.appointment.service,
         id: this.appointment.id,
       };
 

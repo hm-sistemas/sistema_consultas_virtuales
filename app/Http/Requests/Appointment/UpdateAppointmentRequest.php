@@ -31,6 +31,7 @@ class UpdateAppointmentRequest extends FormRequest
             'comments' => 'string|nullable',
             'title' => 'string|required',
             'description' => 'string|nullable',
+            'service' => 'required',
         ];
     }
 }
