@@ -17,9 +17,24 @@ class CreatePatientsTable extends Migration
             $table->string('last_name', 90);
             $table->string('name', 90);
             $table->string('full_name', 181)->index();
-            $table->string('email', 170)->nullable();
-            $table->string('phone_number')->nullable();
+
+            $table->string('street')->nullable();
+            $table->string('street_number')->nullable();
+            $table->string('city')->nullable();
             $table->tinyInteger('gender')->default(0);
+            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('occupation')->default(0);
+            $table->string('state')->nullable();
+
+            $table->string('country')->nullable();
+            $table->string('birth_city')->nullable();
+            $table->string('birth_state')->nullable();
+            $table->string('birth_country')->nullable();
+
+            $table->integer('zip_code')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
+            $table->boolean('insured');
 
             $table->date('birth_date');
 
