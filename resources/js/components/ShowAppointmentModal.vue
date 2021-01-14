@@ -196,7 +196,7 @@
                           <label
                             for="description"
                             class="block text-sm font-medium text-gray-700"
-                            >Síntomas</label
+                            >Antecedentes</label
                           >
                           <textarea
                             rows="4"
