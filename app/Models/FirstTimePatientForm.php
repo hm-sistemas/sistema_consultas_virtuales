@@ -70,6 +70,35 @@ class FirstTimePatientForm extends Model
         }
     }
 
+    public function relationship()
+    {
+        switch ($this->insured_relationship) {
+            case 0:
+                return 'Otro.';
+
+                break;
+
+            case 1:
+                return 'Hijo(a).';
+
+                break;
+
+            case 2:
+                return 'Esposo(a)';
+
+                break;
+
+            case 3:
+                return 'Pendiente';
+
+                break;
+
+            default:
+                // code...
+                break;
+        }
+    }
+
     public function patient()
     {
         return $this->belongsTo('App\Models\Patient');

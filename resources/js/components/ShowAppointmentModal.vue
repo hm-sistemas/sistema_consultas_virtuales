@@ -232,6 +232,105 @@
                           </select>
                         </div>
 
+                        <!-- Instruments -->
+
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="oximeter"
+                                    name="oximeter"
+                                    type="checkbox"
+                                    v-model="appointment.oximeter"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="oximeter"
+                                    class="font-medium text-gray-700"
+                                    >Oximetro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="thermometer"
+                                    name="thermometer"
+                                    type="checkbox"
+                                    v-model="appointment.thermometer"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="thermometer"
+                                    class="font-medium text-gray-700"
+                                    >Termómetro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="glucometer"
+                                    name="glucometer"
+                                    type="checkbox"
+                                    v-model="appointment.glucometer"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="glucometer"
+                                    class="font-medium text-gray-700"
+                                    >Glucometro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="baumanometer"
+                                    name="baumanometer"
+                                    type="checkbox"
+                                    v-model="appointment.baumanometer"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="baumanometer"
+                                    class="font-medium text-gray-700"
+                                    >Baumanómetro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+
                         <div class="col-span-6">
                           <label
                             for="comments"
@@ -298,6 +397,10 @@ export default {
     event: {
       handler: function (newVal, oldVal) {
         this.appointment.first_time = newVal.extendedProps.first_time;
+        this.appointment.oximeter = newVal.extendedProps.oximeter;
+        this.appointment.thermometer = newVal.extendedProps.thermometer;
+        this.appointment.baumanometer = newVal.extendedProps.baumanometer;
+        this.appointment.glucometer = newVal.extendedProps.glucometer;
         this.appointment.description = newVal.extendedProps.description;
         this.appointment.user_id = newVal.extendedProps.doctor.id;
         this.appointment.patient = newVal.extendedProps.patient;
@@ -338,6 +441,10 @@ export default {
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
         service: this.appointment.service,
+        oximeter: this.appointment.oximeter,
+        thermometer: this.appointment.thermometer,
+        baumanometer: this.appointment.baumanometer,
+        glucometer: this.appointment.glucometer,
         id: this.appointment.id,
       };
 
@@ -356,7 +463,7 @@ export default {
         });
     },
     deleteEvent() {
-      var n = new Noty({
+      /* var n = new Noty({
         text: 'Do you want to continue? <input id="example" type="text">',
         buttons: [
           Noty.button(
@@ -374,7 +481,7 @@ export default {
           }),
         ],
       });
-      n.show();
+      n.show(); */
 
       /* axios
         .delete("/appointments/" + this.appointment.id)

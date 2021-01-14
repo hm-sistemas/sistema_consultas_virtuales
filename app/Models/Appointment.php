@@ -21,6 +21,10 @@ class Appointment extends Model
         'creator_id',
         'status',
         'service',
+        'oximeter',
+        'thermometer',
+        'baumanometer',
+        'glucometer',
     ];
 
     protected $dates = ['date', 'start', 'end'];

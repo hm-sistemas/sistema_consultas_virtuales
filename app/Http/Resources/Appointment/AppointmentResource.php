@@ -35,6 +35,10 @@ class AppointmentResource extends JsonResource
             'doctor' => $this->doctor,
             'user' => $this->user,
             'first_time' => $this->first_time,
+            'oximeter' => $this->oximeter,
+            'thermometer' => $this->thermometer,
+            'baumanometer' => $this->baumanometer,
+            'glucometer' => $this->glucometer,
         ];
     }
 }

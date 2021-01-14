@@ -96,9 +96,6 @@
                         </div>
                         <div class="col-span-6">
                           <fieldset>
-                            <!-- <legend class="text-base font-medium text-gray-900">
-                              By Email
-                            </legend> -->
                             <div class="mt-4 space-y-4">
                               <div class="flex items-start">
                                 <div class="flex items-center h-5">
@@ -116,10 +113,6 @@
                                     class="font-medium text-gray-700"
                                     >Primera Vez</label
                                   >
-                                  <!-- <p class="text-gray-500">
-                                    Get notified when someones posts a comment
-                                    on a posting.
-                                  </p> -->
                                 </div>
                               </div>
                             </div>
@@ -210,18 +203,108 @@
                             v-model="appointment.service"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
-                            <option selected value="0">
-                              Telnor
-                            </option>
-                            <option value="1">
-                              WhatsApp
-                            </option>
-                            <option value="2">
-                              Zoom
-                            </option>
+                            <option selected value="0">Telnor</option>
+                            <option value="1">WhatsApp</option>
+                            <option value="2">Zoom</option>
                           </select>
                         </div>
-
+                        <!-- Instruments -->
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="oximeter"
+                                    name="oximeter"
+                                    type="checkbox"
+                                    v-model="appointment.oximeter"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="oximeter"
+                                    class="font-medium text-gray-700"
+                                    >Oximetro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="thermometer"
+                                    name="thermometer"
+                                    type="checkbox"
+                                    v-model="appointment.thermometer"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="thermometer"
+                                    class="font-medium text-gray-700"
+                                    >Termómetro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="glucometer"
+                                    name="glucometer"
+                                    type="checkbox"
+                                    v-model="appointment.glucometer"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="glucometer"
+                                    class="font-medium text-gray-700"
+                                    >Glucometro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                        <div class="col-span-6">
+                          <fieldset>
+                            <div class="mt-4 space-y-4">
+                              <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                  <input
+                                    id="baumanometer"
+                                    name="baumanometer"
+                                    type="checkbox"
+                                    v-model="appointment.baumanometer"
+                                    class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                  />
+                                </div>
+                                <div class="ml-3 text-sm">
+                                  <label
+                                    for="baumanometer"
+                                    class="font-medium text-gray-700"
+                                    >Baumanómetro</label
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
                         <div class="col-span-6">
                           <label
                             for="comments"
@@ -255,7 +338,6 @@
             <button
               @click="closeModal()"
               type="button"
-
               class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             >
               Cerrar
@@ -286,6 +368,10 @@ export default {
       comments: "",
       title: "",
       first_time: false,
+      oximeter: false,
+      thermometer: false,
+      baumanometer: false,
+      glucometer: false,
       service: 0,
     },
     doctors: [],
@@ -333,26 +419,36 @@ export default {
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
-        service: this.appointment.service
+        service: this.appointment.service,
+        oximeter: this.appointment.oximeter,
+        thermometer: this.appointment.thermometer,
+        baumanometer: this.appointment.baumanometer,
+        glucometer: this.appointment.glucometer,
       };
 
       console.log(newEventData);
 
-      axios.post("/appointments", newEventData).then((response) => {
-        console.log(response);
-        this.closeModal();
-        this.$emit("event-created");
-      }).catch((error) => {
-        console.log(error);
-        this.$emit("error");
-      })
-
+      axios
+        .post("/appointments", newEventData)
+        .then((response) => {
+          console.log(response);
+          this.closeModal();
+          this.$emit("event-created");
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$emit("error");
+        });
     },
   },
 
   computed: {
     validEventData() {
-      return this.appointment.title != "" && this.appointment.user_id > 0 && this.appointment.patient;
+      return (
+        this.appointment.title != "" &&
+        this.appointment.user_id > 0 &&
+        this.appointment.patient
+      );
     },
     dateStr() {
       return dayjs(this.event.dateStr).locale("es").utc().format("LLLL");

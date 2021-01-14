@@ -26,11 +26,24 @@ class PatientRequest extends FormRequest
         return [
             'full_name' => 'max:250|required',
             'birth_date' => 'date',
-            'gender' => 'max:255',
+            'gender' => 'required',
             'phone_number' => 'max:255',
-            'email' => 'max:255',
+            'email' => 'required|max:255',
             'last_name' => 'required|max:80',
             'name' => 'required|min:2|max:100',
+            'status' => 'required',
+            'occupation' => 'required',
+            'insured' => 'required',
+            'deductible' => 'required',
+            'street' => 'max:255',
+            'street_number' => 'max:255',
+            'city' => 'max:255',
+            'state' => 'max:255',
+            'country' => 'max:255',
+            'zip_code' => 'max:255',
+            'birth_city' => 'max:255',
+            'birth_state' => 'max:255',
+            'birth_country' => 'max:255',
         ];
     }
 }

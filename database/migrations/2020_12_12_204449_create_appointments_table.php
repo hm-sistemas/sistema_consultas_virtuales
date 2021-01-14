@@ -24,6 +24,12 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('patient_id');
             $table->boolean('first_time')->default(0);
+
+            $table->boolean('oximeter')->default(0);
+            $table->boolean('thermometer')->default(0);
+            $table->boolean('baumanometer')->default(0);
+            $table->boolean('glucometer')->default(0);
+
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('service')->default(0);
 

@@ -138,9 +138,212 @@
 
                           <div class="col-span-6 sm:col-span-4">
                             <label
+                              for="street_address"
+                              class="block text-sm font-medium text-gray-700"
+                              >Calle</label
+                            >
+                            <input
+                              type="text"
+                              name="street"
+                              id="street"
+                              v-model="patient.street"
+                              autocomplete="street"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+                          <div class="col-span-6 sm:col-span-2">
+                            <label
+                              for="street_number"
+                              class="block text-sm font-medium text-gray-700"
+                              >No. Calle</label
+                            >
+                            <input
+                              type="text"
+                              name="street_number"
+                              id="street_number"
+                              v-model="patient.street_number"
+                              autocomplete="street_number"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                            <label
+                              for="city"
+                              class="block text-sm font-medium text-gray-700"
+                              >Ciudad</label
+                            >
+                            <input
+                              type="text"
+                              name="city"
+                              id="city"
+                              v-model="patient.city"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                            <label
+                              for="state"
+                              class="block text-sm font-medium text-gray-700"
+                              >Estado</label
+                            >
+                            <input
+                              type="text"
+                              name="state"
+                              id="state"
+                              v-model="patient.state"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                            <label
+                              for="postal_code"
+                              class="block text-sm font-medium text-gray-700"
+                              >Código Postal</label
+                            >
+                            <input
+                              type="text"
+                              name="postal_code"
+                              id="postal_code"
+                              v-model="patient.zip_code"
+                              autocomplete="postal-code"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6">
+                            <label
+                              for="country"
+                              class="block text-sm font-medium text-gray-700"
+                              >País</label
+                            >
+                            <input
+                              type="text"
+                              name="country"
+                              id="country"
+                              v-model="patient.country"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                            <label
+                              for="birth_city"
+                              class="block text-sm font-medium text-gray-700"
+                              >Ciudad (nacimiento)</label
+                            >
+                            <input
+                              type="text"
+                              name="birth_city"
+                              id="birth_city"
+                              v-model="patient.birth_city"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                            <label
+                              for="birth_state"
+                              class="block text-sm font-medium text-gray-700"
+                              >Estado (nacimiento)</label
+                            >
+                            <input
+                              type="text"
+                              name="birth_state"
+                              id="birth_state"
+                              v-model="patient.birth_state"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                            <label
+                              for="birth_country"
+                              class="block text-sm font-medium text-gray-700"
+                              >País (nacimiento)</label
+                            >
+                            <input
+                              type="text"
+                              name="birth_country"
+                              id="birth_country"
+                              v-model="patient.birth_country"
+                              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            />
+                          </div>
+
+                          <div class="col-span-6">
+                            <label
+                              for="status"
+                              class="block text-sm font-medium text-gray-700"
+                              >Estado civil</label
+                            >
+                            <select
+                              id="status"
+                              name="status"
+                              v-model="patient.status"
+                              autocomplete="status"
+                              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            >
+                              <option value="1" selected>Casado</option>
+                              <option value="2">Soltero</option>
+                              <option value="0">Otro</option>
+                            </select>
+                          </div>
+
+                          <div class="col-span-6">
+                            <label
+                              for="country"
+                              class="block text-sm font-medium text-gray-700"
+                              >Ocupación</label
+                            >
+                            <select
+                              id="occupation"
+                              name="occupation"
+                              v-model="patient.occupation"
+                              autocomplete="occupation"
+                              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            >
+                              <option value="1" selected>Empleado</option>
+                              <option value="2">Estudiante</option>
+                              <option value="3">
+                                Estudiante tiempo parcial
+                              </option>
+                              <option value="0">Otro</option>
+                            </select>
+                          </div>
+
+                          <div class="col-span-6">
+                            <fieldset>
+                              <div class="mt-4 space-y-4">
+                                <div class="flex items-start">
+                                  <div class="flex items-center h-5">
+                                    <input
+                                      id="baumanometer"
+                                      name="baumanometer"
+                                      type="checkbox"
+                                      v-model="patient.insured"
+                                      class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                    />
+                                  </div>
+                                  <div class="ml-3 text-sm">
+                                    <label
+                                      for="baumanometer"
+                                      class="font-medium text-gray-700"
+                                      >¿Cuenta con aseguranza?</label
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                          </div>
+
+                          <div class="col-span-6">
+                            <label
                               for="email_address"
                               class="block text-sm font-medium text-gray-700"
-                              >Correo electrónico (opcional)</label
+                              >Correo electrónico</label
                             >
                             <input
                               type="text"
@@ -241,6 +444,19 @@ export default {
       email: "",
       phone_number: "",
       gender: 0,
+      street: "",
+      street_number: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      country: "",
+      status: 1,
+      occupation: 1,
+      insured: 0,
+      deductible: -1,
+      birth_city: "",
+      birth_state: "",
+      birth_country: "",
     },
     show: false,
   }),
@@ -255,6 +471,19 @@ export default {
       this.patient.email = "";
       this.patient.phone_number = "";
       this.patient.gender = 0;
+      this.patient.status = 1;
+      this.patient.occupation = 1;
+      this.patient.insured = 0;
+      this.patient.deductible = -1;
+      this.patient.street = "";
+      this.patient.street_number = "";
+      this.patient.city = "";
+      this.patient.state = "";
+      this.patient.country = "";
+      this.patient.zip_code = "";
+      this.patient.birth_city = "";
+      this.patient.birth_state = "";
+      this.patient.birth_country = "";
     },
 
     savePatient() {
@@ -264,7 +493,7 @@ export default {
         console.log(response.data);
         new Noty({
           text: `Paciente ha sido registrado.`,
-          timeout: 700,
+          timeout: 1000,
           type: "success",
         }).show();
         this.closeModal();

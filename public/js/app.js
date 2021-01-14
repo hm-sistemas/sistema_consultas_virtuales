@@ -21571,6 +21571,88 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -21594,6 +21676,10 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
         comments: "",
         title: "",
         first_time: false,
+        oximeter: false,
+        thermometer: false,
+        baumanometer: false,
+        glucometer: false,
         service: 0
       },
       doctors: [],
@@ -21642,7 +21728,11 @@ dayjs__WEBPACK_IMPORTED_MODULE_0___default.a.extend(customParseFormat);
         patient_id: this.appointment.patient.id,
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
-        service: this.appointment.service
+        service: this.appointment.service,
+        oximeter: this.appointment.oximeter,
+        thermometer: this.appointment.thermometer,
+        baumanometer: this.appointment.baumanometer,
+        glucometer: this.appointment.glucometer
       };
       console.log(newEventData);
       axios.post("/appointments", newEventData).then(function (response) {
@@ -22120,6 +22210,209 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -22131,7 +22424,20 @@ __webpack_require__.r(__webpack_exports__);
         birth_date: null,
         email: "",
         phone_number: "",
-        gender: 0
+        gender: 0,
+        street: "",
+        street_number: "",
+        city: "",
+        state: "",
+        zip_code: "",
+        country: "",
+        status: 1,
+        occupation: 1,
+        insured: 0,
+        deductible: -1,
+        birth_city: "",
+        birth_state: "",
+        birth_country: ""
       },
       show: false
     };
@@ -22146,6 +22452,19 @@ __webpack_require__.r(__webpack_exports__);
       this.patient.email = "";
       this.patient.phone_number = "";
       this.patient.gender = 0;
+      this.patient.status = 1;
+      this.patient.occupation = 1;
+      this.patient.insured = 0;
+      this.patient.deductible = -1;
+      this.patient.street = "";
+      this.patient.street_number = "";
+      this.patient.city = "";
+      this.patient.state = "";
+      this.patient.country = "";
+      this.patient.zip_code = "";
+      this.patient.birth_city = "";
+      this.patient.birth_state = "";
+      this.patient.birth_country = "";
     },
     savePatient: function savePatient() {
       var _this = this;
@@ -22156,7 +22475,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
         new noty__WEBPACK_IMPORTED_MODULE_0___default.a({
           text: "Paciente ha sido registrado.",
-          timeout: 700,
+          timeout: 1000,
           type: "success"
         }).show();
 
@@ -22483,6 +22802,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -22502,6 +22920,10 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
     event: {
       handler: function handler(newVal, oldVal) {
         this.appointment.first_time = newVal.extendedProps.first_time;
+        this.appointment.oximeter = newVal.extendedProps.oximeter;
+        this.appointment.thermometer = newVal.extendedProps.thermometer;
+        this.appointment.baumanometer = newVal.extendedProps.baumanometer;
+        this.appointment.glucometer = newVal.extendedProps.glucometer;
         this.appointment.description = newVal.extendedProps.description;
         this.appointment.user_id = newVal.extendedProps.doctor.id;
         this.appointment.patient = newVal.extendedProps.patient;
@@ -22544,6 +22966,10 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
         comments: this.appointment.comments,
         first_time: this.appointment.first_time,
         service: this.appointment.service,
+        oximeter: this.appointment.oximeter,
+        thermometer: this.appointment.thermometer,
+        baumanometer: this.appointment.baumanometer,
+        glucometer: this.appointment.glucometer,
         id: this.appointment.id
       };
       console.log("new data: ", newEventData);
@@ -22560,19 +22986,25 @@ dayjs__WEBPACK_IMPORTED_MODULE_1___default.a.extend(customParseFormat);
       });
     },
     deleteEvent: function deleteEvent() {
-      var n = new noty__WEBPACK_IMPORTED_MODULE_0___default.a({
+      /* var n = new Noty({
         text: 'Do you want to continue? <input id="example" type="text">',
-        buttons: [noty__WEBPACK_IMPORTED_MODULE_0___default.a.button("YES", "btn btn-success", function () {
-          console.log("button 1 clicked");
-        }, {
-          id: "button1",
-          "data-status": "ok"
-        }), noty__WEBPACK_IMPORTED_MODULE_0___default.a.button("NO", "btn btn-error", function () {
-          console.log("button 2 clicked");
-          n.close();
-        })]
+        buttons: [
+          Noty.button(
+            "YES",
+            "btn btn-success",
+            function () {
+              console.log("button 1 clicked");
+            },
+            { id: "button1", "data-status": "ok" }
+          ),
+           Noty.button("NO", "btn btn-error", function () {
+            console.log("button 2 clicked");
+            n.close();
+          }),
+        ],
       });
-      n.show();
+      n.show(); */
+
       /* axios
         .delete("/appointments/" + this.appointment.id)
         .then((response) => {
@@ -44854,34 +45286,698 @@ var render = function() {
                                                           value: "0"
                                                         }
                                                       },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                            Telnor\n                          "
-                                                        )
-                                                      ]
+                                                      [_vm._v("Telnor")]
                                                     ),
                                                     _vm._v(" "),
                                                     _c(
                                                       "option",
                                                       { attrs: { value: "1" } },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                            WhatsApp\n                          "
-                                                        )
-                                                      ]
+                                                      [_vm._v("WhatsApp")]
                                                     ),
                                                     _vm._v(" "),
                                                     _c(
                                                       "option",
                                                       { attrs: { value: "2" } },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                            Zoom\n                          "
-                                                        )
-                                                      ]
+                                                      [_vm._v("Zoom")]
                                                     )
                                                   ]
                                                 )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .oximeter,
+                                                                    expression:
+                                                                      "appointment.oximeter"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "oximeter",
+                                                                  name:
+                                                                    "oximeter",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .oximeter
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .oximeter,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .oximeter
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .oximeter,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "oximeter",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "oximeter",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "oximeter",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "oximeter"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Oximetro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .thermometer,
+                                                                    expression:
+                                                                      "appointment.thermometer"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "thermometer",
+                                                                  name:
+                                                                    "thermometer",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .thermometer
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .thermometer,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .thermometer
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .thermometer,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "thermometer",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "thermometer",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "thermometer",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "thermometer"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Termómetro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .glucometer,
+                                                                    expression:
+                                                                      "appointment.glucometer"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "glucometer",
+                                                                  name:
+                                                                    "glucometer",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .glucometer
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .glucometer,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .glucometer
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .glucometer,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "glucometer",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "glucometer",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "glucometer",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "glucometer"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Glucometro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .baumanometer,
+                                                                    expression:
+                                                                      "appointment.baumanometer"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "baumanometer",
+                                                                  name:
+                                                                    "baumanometer",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .baumanometer
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .baumanometer,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .baumanometer
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .baumanometer,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "baumanometer",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "baumanometer",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "baumanometer",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "baumanometer"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Baumanómetro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
                                               ]
                                             ),
                                             _vm._v(" "),
@@ -45418,12 +46514,933 @@ var render = function() {
                                                       staticClass:
                                                         "block text-sm font-medium text-gray-700",
                                                       attrs: {
+                                                        for: "street_address"
+                                                      }
+                                                    },
+                                                    [_vm._v("Calle")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient.street,
+                                                        expression:
+                                                          "patient.street"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "street",
+                                                      id: "street",
+                                                      autocomplete: "street"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.patient.street
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "street",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: {
+                                                        for: "street_number"
+                                                      }
+                                                    },
+                                                    [_vm._v("No. Calle")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient
+                                                            .street_number,
+                                                        expression:
+                                                          "patient.street_number"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "street_number",
+                                                      id: "street_number",
+                                                      autocomplete:
+                                                        "street_number"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.patient
+                                                          .street_number
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "street_number",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-6 lg:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: { for: "city" }
+                                                    },
+                                                    [_vm._v("Ciudad")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.patient.city,
+                                                        expression:
+                                                          "patient.city"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "city",
+                                                      id: "city"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.patient.city
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "city",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-3 lg:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: { for: "state" }
+                                                    },
+                                                    [_vm._v("Estado")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient.state,
+                                                        expression:
+                                                          "patient.state"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "state",
+                                                      id: "state"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.patient.state
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "state",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-3 lg:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: {
+                                                        for: "postal_code"
+                                                      }
+                                                    },
+                                                    [_vm._v("Código Postal")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient.zip_code,
+                                                        expression:
+                                                          "patient.zip_code"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "postal_code",
+                                                      id: "postal_code",
+                                                      autocomplete:
+                                                        "postal-code"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.patient.zip_code
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "zip_code",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-span-6" },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: { for: "country" }
+                                                    },
+                                                    [_vm._v("País")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient.country,
+                                                        expression:
+                                                          "patient.country"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "country",
+                                                      id: "country"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.patient.country
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "country",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-6 lg:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: {
+                                                        for: "birth_city"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "Ciudad (nacimiento)"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient
+                                                            .birth_city,
+                                                        expression:
+                                                          "patient.birth_city"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "birth_city",
+                                                      id: "birth_city"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.patient.birth_city
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "birth_city",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-3 lg:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: {
+                                                        for: "birth_state"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "Estado (nacimiento)"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient
+                                                            .birth_state,
+                                                        expression:
+                                                          "patient.birth_state"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "birth_state",
+                                                      id: "birth_state"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.patient.birth_state
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "birth_state",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "col-span-6 sm:col-span-3 lg:col-span-2"
+                                                },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: {
+                                                        for: "birth_country"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "País (nacimiento)"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.patient
+                                                            .birth_country,
+                                                        expression:
+                                                          "patient.birth_country"
+                                                      }
+                                                    ],
+                                                    staticClass:
+                                                      "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                                    attrs: {
+                                                      type: "text",
+                                                      name: "birth_country",
+                                                      id: "birth_country"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.patient
+                                                          .birth_country
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.patient,
+                                                          "birth_country",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-span-6" },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: { for: "status" }
+                                                    },
+                                                    [_vm._v("Estado civil")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "select",
+                                                    {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.patient.status,
+                                                          expression:
+                                                            "patient.status"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                                      attrs: {
+                                                        id: "status",
+                                                        name: "status",
+                                                        autocomplete: "status"
+                                                      },
+                                                      on: {
+                                                        change: function(
+                                                          $event
+                                                        ) {
+                                                          var $$selectedVal = Array.prototype.filter
+                                                            .call(
+                                                              $event.target
+                                                                .options,
+                                                              function(o) {
+                                                                return o.selected
+                                                              }
+                                                            )
+                                                            .map(function(o) {
+                                                              var val =
+                                                                "_value" in o
+                                                                  ? o._value
+                                                                  : o.value
+                                                              return val
+                                                            })
+                                                          _vm.$set(
+                                                            _vm.patient,
+                                                            "status",
+                                                            $event.target
+                                                              .multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: {
+                                                            value: "1",
+                                                            selected: ""
+                                                          }
+                                                        },
+                                                        [_vm._v("Casado")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: { value: "2" }
+                                                        },
+                                                        [_vm._v("Soltero")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: { value: "0" }
+                                                        },
+                                                        [_vm._v("Otro")]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-span-6" },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: { for: "country" }
+                                                    },
+                                                    [_vm._v("Ocupación")]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "select",
+                                                    {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.patient
+                                                              .occupation,
+                                                          expression:
+                                                            "patient.occupation"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                                                      attrs: {
+                                                        id: "occupation",
+                                                        name: "occupation",
+                                                        autocomplete:
+                                                          "occupation"
+                                                      },
+                                                      on: {
+                                                        change: function(
+                                                          $event
+                                                        ) {
+                                                          var $$selectedVal = Array.prototype.filter
+                                                            .call(
+                                                              $event.target
+                                                                .options,
+                                                              function(o) {
+                                                                return o.selected
+                                                              }
+                                                            )
+                                                            .map(function(o) {
+                                                              var val =
+                                                                "_value" in o
+                                                                  ? o._value
+                                                                  : o.value
+                                                              return val
+                                                            })
+                                                          _vm.$set(
+                                                            _vm.patient,
+                                                            "occupation",
+                                                            $event.target
+                                                              .multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: {
+                                                            value: "1",
+                                                            selected: ""
+                                                          }
+                                                        },
+                                                        [_vm._v("Empleado")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: { value: "2" }
+                                                        },
+                                                        [_vm._v("Estudiante")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: { value: "3" }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                              Estudiante tiempo parcial\n                            "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "option",
+                                                        {
+                                                          attrs: { value: "0" }
+                                                        },
+                                                        [_vm._v("Otro")]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-span-6" },
+                                                [
+                                                  _c("fieldset", [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "mt-4 space-y-4"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "div",
+                                                          {
+                                                            staticClass:
+                                                              "flex items-start"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "flex items-center h-5"
+                                                              },
+                                                              [
+                                                                _c("input", {
+                                                                  directives: [
+                                                                    {
+                                                                      name:
+                                                                        "model",
+                                                                      rawName:
+                                                                        "v-model",
+                                                                      value:
+                                                                        _vm
+                                                                          .patient
+                                                                          .insured,
+                                                                      expression:
+                                                                        "patient.insured"
+                                                                    }
+                                                                  ],
+                                                                  staticClass:
+                                                                    "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                  attrs: {
+                                                                    id:
+                                                                      "baumanometer",
+                                                                    name:
+                                                                      "baumanometer",
+                                                                    type:
+                                                                      "checkbox"
+                                                                  },
+                                                                  domProps: {
+                                                                    checked: Array.isArray(
+                                                                      _vm
+                                                                        .patient
+                                                                        .insured
+                                                                    )
+                                                                      ? _vm._i(
+                                                                          _vm
+                                                                            .patient
+                                                                            .insured,
+                                                                          null
+                                                                        ) > -1
+                                                                      : _vm
+                                                                          .patient
+                                                                          .insured
+                                                                  },
+                                                                  on: {
+                                                                    change: function(
+                                                                      $event
+                                                                    ) {
+                                                                      var $$a =
+                                                                          _vm
+                                                                            .patient
+                                                                            .insured,
+                                                                        $$el =
+                                                                          $event.target,
+                                                                        $$c = $$el.checked
+                                                                          ? true
+                                                                          : false
+                                                                      if (
+                                                                        Array.isArray(
+                                                                          $$a
+                                                                        )
+                                                                      ) {
+                                                                        var $$v = null,
+                                                                          $$i = _vm._i(
+                                                                            $$a,
+                                                                            $$v
+                                                                          )
+                                                                        if (
+                                                                          $$el.checked
+                                                                        ) {
+                                                                          $$i <
+                                                                            0 &&
+                                                                            _vm.$set(
+                                                                              _vm.patient,
+                                                                              "insured",
+                                                                              $$a.concat(
+                                                                                [
+                                                                                  $$v
+                                                                                ]
+                                                                              )
+                                                                            )
+                                                                        } else {
+                                                                          $$i >
+                                                                            -1 &&
+                                                                            _vm.$set(
+                                                                              _vm.patient,
+                                                                              "insured",
+                                                                              $$a
+                                                                                .slice(
+                                                                                  0,
+                                                                                  $$i
+                                                                                )
+                                                                                .concat(
+                                                                                  $$a.slice(
+                                                                                    $$i +
+                                                                                      1
+                                                                                  )
+                                                                                )
+                                                                            )
+                                                                        }
+                                                                      } else {
+                                                                        _vm.$set(
+                                                                          _vm.patient,
+                                                                          "insured",
+                                                                          $$c
+                                                                        )
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                })
+                                                              ]
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "ml-3 text-sm"
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "label",
+                                                                  {
+                                                                    staticClass:
+                                                                      "font-medium text-gray-700",
+                                                                    attrs: {
+                                                                      for:
+                                                                        "baumanometer"
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "¿Cuenta con aseguranza?"
+                                                                    )
+                                                                  ]
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ])
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-span-6" },
+                                                [
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "block text-sm font-medium text-gray-700",
+                                                      attrs: {
                                                         for: "email_address"
                                                       }
                                                     },
                                                     [
                                                       _vm._v(
-                                                        "Correo electrónico (opcional)"
+                                                        "Correo electrónico"
                                                       )
                                                     ]
                                                   ),
@@ -46325,6 +48342,682 @@ var render = function() {
                                                     )
                                                   ]
                                                 )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .oximeter,
+                                                                    expression:
+                                                                      "appointment.oximeter"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "oximeter",
+                                                                  name:
+                                                                    "oximeter",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .oximeter
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .oximeter,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .oximeter
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .oximeter,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "oximeter",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "oximeter",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "oximeter",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "oximeter"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Oximetro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .thermometer,
+                                                                    expression:
+                                                                      "appointment.thermometer"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "thermometer",
+                                                                  name:
+                                                                    "thermometer",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .thermometer
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .thermometer,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .thermometer
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .thermometer,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "thermometer",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "thermometer",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "thermometer",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "thermometer"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Termómetro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .glucometer,
+                                                                    expression:
+                                                                      "appointment.glucometer"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "glucometer",
+                                                                  name:
+                                                                    "glucometer",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .glucometer
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .glucometer,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .glucometer
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .glucometer,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "glucometer",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "glucometer",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "glucometer",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "glucometer"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Glucometro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-span-6" },
+                                              [
+                                                _c("fieldset", [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "mt-4 space-y-4"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "flex items-start"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "flex items-center h-5"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .appointment
+                                                                        .baumanometer,
+                                                                    expression:
+                                                                      "appointment.baumanometer"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                                                                attrs: {
+                                                                  id:
+                                                                    "baumanometer",
+                                                                  name:
+                                                                    "baumanometer",
+                                                                  type:
+                                                                    "checkbox"
+                                                                },
+                                                                domProps: {
+                                                                  checked: Array.isArray(
+                                                                    _vm
+                                                                      .appointment
+                                                                      .baumanometer
+                                                                  )
+                                                                    ? _vm._i(
+                                                                        _vm
+                                                                          .appointment
+                                                                          .baumanometer,
+                                                                        null
+                                                                      ) > -1
+                                                                    : _vm
+                                                                        .appointment
+                                                                        .baumanometer
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    var $$a =
+                                                                        _vm
+                                                                          .appointment
+                                                                          .baumanometer,
+                                                                      $$el =
+                                                                        $event.target,
+                                                                      $$c = $$el.checked
+                                                                        ? true
+                                                                        : false
+                                                                    if (
+                                                                      Array.isArray(
+                                                                        $$a
+                                                                      )
+                                                                    ) {
+                                                                      var $$v = null,
+                                                                        $$i = _vm._i(
+                                                                          $$a,
+                                                                          $$v
+                                                                        )
+                                                                      if (
+                                                                        $$el.checked
+                                                                      ) {
+                                                                        $$i <
+                                                                          0 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "baumanometer",
+                                                                            $$a.concat(
+                                                                              [
+                                                                                $$v
+                                                                              ]
+                                                                            )
+                                                                          )
+                                                                      } else {
+                                                                        $$i >
+                                                                          -1 &&
+                                                                          _vm.$set(
+                                                                            _vm.appointment,
+                                                                            "baumanometer",
+                                                                            $$a
+                                                                              .slice(
+                                                                                0,
+                                                                                $$i
+                                                                              )
+                                                                              .concat(
+                                                                                $$a.slice(
+                                                                                  $$i +
+                                                                                    1
+                                                                                )
+                                                                              )
+                                                                          )
+                                                                      }
+                                                                    } else {
+                                                                      _vm.$set(
+                                                                        _vm.appointment,
+                                                                        "baumanometer",
+                                                                        $$c
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }
+                                                              })
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "ml-3 text-sm"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "font-medium text-gray-700",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "baumanometer"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Baumanómetro"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
                                               ]
                                             ),
                                             _vm._v(" "),

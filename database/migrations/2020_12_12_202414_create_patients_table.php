@@ -36,6 +36,8 @@ class CreatePatientsTable extends Migration
             $table->string('email')->nullable();
             $table->boolean('insured');
 
+            $table->decimal('deductible', 13, 4)->default(-1);
+
             $table->date('birth_date');
 
             $table->timestamps();
