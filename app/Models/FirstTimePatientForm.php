@@ -73,11 +73,6 @@ class FirstTimePatientForm extends Model
     public function relationship()
     {
         switch ($this->insured_relationship) {
-            case 0:
-                return 'Otro.';
-
-                break;
-
             case 1:
                 return 'Hijo(a).';
 
@@ -89,7 +84,7 @@ class FirstTimePatientForm extends Model
                 break;
 
             case 3:
-                return 'Pendiente';
+                return 'Yo mismo(a)';
 
                 break;
 

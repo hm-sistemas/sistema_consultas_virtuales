@@ -44,6 +44,25 @@ class PatientRequest extends FormRequest
             'birth_city' => 'max:255',
             'birth_state' => 'max:255',
             'birth_country' => 'max:255',
+
+            'referrer_name' => 'max:255',
+            'contact_name' => 'max:255',
+            'contact_email' => 'max:255',
+            'contact_phone_number' => 'max:255',
+            'insured_name' => 'max:255',
+            'insured_ssn' => 'max:255',
+            'insurer_name' => 'max:255',
+            'insurer_phone_number' => 'max:255',
+            'work_name' => 'max:255',
+            'work_phone_number' => 'max:255',
+
+            'children' => 'numeric',
+            'first_consult' => 'numeric',
+            'first_visit' => 'numeric',
+            'referral' => 'numeric',
+            'insured_relationship' => 'numeric',
+            'date' => 'date',
+            'time' => 'date_format:H:i',
         ];
     }
 }

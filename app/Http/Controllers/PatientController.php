@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Patient\PatientRequest;
 use App\Http\Resources\Patient\PatientResource;
+use App\Models\FirstTimePatientForm;
 use App\Models\Patient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -58,6 +60,10 @@ class PatientController extends Controller
     {
         $validated = $request->validated();
         $patient = Patient::create($validated);
+        $validated['patient_id'] = $patient->id;
+        $validated['arrival_time'] = Carbon::createFromFormat('Y-m-d H:i', $validated['date'].' '.$validated['time']);
+
+        FirstTimePatientForm::create($validated);
 
         return (new PatientResource($patient))->additional([
             'meta' => [

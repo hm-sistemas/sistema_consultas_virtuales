@@ -19,7 +19,7 @@ class CreateFirstTimePatientFormsTable extends Migration
             $table->boolean('first_consult')->default(1);
             $table->boolean('first_visit')->default(1);
             $table->tinyInteger('children')->default(0);
-            $table->tinyInteger('referral')->default(3);
+            $table->tinyInteger('referral')->default(0);
             $table->string('referrer_name')->nullable();
 
             $table->string('contact_name')->nullable();
@@ -28,7 +28,7 @@ class CreateFirstTimePatientFormsTable extends Migration
 
             $table->string('insured_name')->nullable();
             $table->string('insured_ssn')->nullable();
-            $table->tinyInteger('insured_relationship')->default(0);
+            $table->tinyInteger('insured_relationship')->default(3);
 
             $table->string('insurer_name')->nullable();
             $table->string('insurer_phone_number')->nullable();
