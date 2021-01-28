@@ -89,12 +89,12 @@ class Patient extends Model
     {
         switch ($this->gender) {
             case 0:
-                return 'Masculino';
+                return 'M';
 
                 break;
 
             case 1:
-                return 'Femenino';
+                return 'F';
 
                 break;
 
