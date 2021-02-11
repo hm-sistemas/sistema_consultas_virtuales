@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('appointments')" :active="request()->routeIs('appointments')">
                         {{ __('Citas') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('patients.index')" :active="request()->routeIs('patients.index')">
+                        {{ __('Pacientes') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -78,6 +81,9 @@
             </x-responsive-nav-link> --}}
             <x-responsive-nav-link :href="route('appointments')" :active="request()->routeIs('appointments')">
                 {{ __('Citas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('patients.index')" :active="request()->routeIs('patients.index')">
+                {{ __('Pacientes') }}
             </x-responsive-nav-link>
         </div>
 

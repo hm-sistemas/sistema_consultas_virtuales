@@ -18,7 +18,7 @@ class MergePDFs
     {
         $fpdi = new Fpdi();
         for ($i = 0; $i < $this->pages_count; ++$i) {
-            $path = 'app/pdf/invoice/newForm'.$i.'.pdf';
+            $path = 'app/pdf/forms/newForm'.$i.'.pdf';
 
             $form = storage_path($path);
 
@@ -27,7 +27,7 @@ class MergePDFs
             $fpdi->addPage();
             $fpdi->useTemplate($tpl);
         }
-        $directory = storage_path('app/pdf/invoice');
+        $directory = storage_path('app/pdf/forms');
         File::cleanDirectory($directory);
 
         return $fpdi->Output($output, $patient_name.'PrimeraVez.pdf');
@@ -37,7 +37,7 @@ class MergePDFs
     {
         $fpdi = new Fpdi();
         for ($i = 0; $i < $this->pages_count; ++$i) {
-            $path = 'app/pdf/invoice/newForm'.$i.'.pdf';
+            $path = 'app/pdf/forms/newForm'.$i.'.pdf';
 
             $form = storage_path($path);
 
@@ -47,7 +47,7 @@ class MergePDFs
             $fpdi->useTemplate($tpl);
         }
 
-        $directory = storage_path('app/pdf/invoice');
+        $directory = storage_path('app/pdf/forms');
         File::cleanDirectory($directory);
         $store = storage_path($destination);
 
