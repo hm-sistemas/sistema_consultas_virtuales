@@ -15,7 +15,7 @@ class FillFirstTimePatientFormPDF
 
 PatientFullName: 
      llx: 34.0365
-     lly: 575.563
+     lly: 585.563
      urx: 316.801
      ury: 592.145
    width: 282.7645
@@ -23,8 +23,8 @@ PatientFullName:
 
 
 DateMonth: 
-     llx: 338.62
-     lly: 580.799
+     llx: 341.62
+     lly: 582
      urx: 373.529
      ury: 593.89
    width: 34.909
@@ -32,8 +32,8 @@ DateMonth:
 
 
 DateDay: 
-     llx: 385.747
-     lly: 580.799
+     llx: 387.747
+     lly: 582
      urx: 414.547
      ury: 594.414
    width: 28.8
@@ -42,7 +42,7 @@ DateDay:
 
 DateYear: 
      llx: 420.656
-     lly: 581.672
+     lly: 582
      urx: 447.711
      ury: 594.763
    width: 27.055
@@ -51,7 +51,7 @@ DateYear:
 
 DateTime: 
      llx: 483.493
-     lly: 573.817
+     lly: 580
      urx: 551.566
      ury: 590.399
    width: 68.073
@@ -59,8 +59,8 @@ DateTime:
 
 
 BirthMonth: 
-     llx: 39.7982
-     lly: 545.976
+     llx: 42.7982
+     lly: 547.5
      urx: 74.7075
      ury: 559.067
    width: 34.9093
@@ -68,8 +68,8 @@ BirthMonth:
 
 
 BirthDay: 
-     llx: 86.9257
-     lly: 545.976
+     llx: 88.9257
+     lly: 547.5
      urx: 115.726
      ury: 559.59
    width: 28.8003
@@ -77,8 +77,8 @@ BirthDay:
 
 
 BirthYear: 
-     llx: 121.835
-     lly: 546.849
+     llx: 123.835
+     lly: 547.5
      urx: 148.89
      ury: 559.94
    width: 27.055
@@ -86,8 +86,8 @@ BirthYear:
 
 
 Age: 
-     llx: 165.032
-     lly: 540.655
+     llx: 170.032
+     lly: 547.5
      urx: 204.654
      ury: 555.317
    width: 39.622
@@ -95,8 +95,8 @@ Age:
 
 
 Sex: 
-     llx: 223.417
-     lly: 540.917
+     llx: 226.417
+     lly: 547.5
      urx: 263.039
      ury: 555.579
    width: 39.622
@@ -105,7 +105,7 @@ Sex:
 
 PatientEmail: 
      llx: 279.358
-     lly: 538.91
+     lly: 547.5
      urx: 427.549
      ury: 555.492
    width: 148.191
@@ -114,7 +114,7 @@ PatientEmail:
 
 PatientPhoneArea: 
      llx: 439.155
-     lly: 543.797
+     lly: 545
      urx: 466.209
      ury: 556.888
    width: 27.054
@@ -123,7 +123,7 @@ PatientPhoneArea:
 
 PatientPhone: 
      llx: 482.384
-     lly: 545.077
+     lly: 545
      urx: 576.464
      ury: 557.644
    width: 94.08
@@ -132,7 +132,7 @@ PatientPhone:
 
 PatientStreet: 
      llx: 34.5588
-     lly: 508.801
+     lly: 509.801
      urx: 279.098
      ury: 521.194
    width: 244.5392
@@ -141,7 +141,7 @@ PatientStreet:
 
 PatientStreetNumber: 
      llx: 282.326
-     lly: 509.237
+     lly: 509.801
      urx: 376.406
      ury: 521.805
    width: 94.08
@@ -150,7 +150,7 @@ PatientStreetNumber:
 
 PatientZIP: 
      llx: 418.238
-     lly: 509.994
+     lly: 509.801
      urx: 512.318
      ury: 522.561
    width: 94.08
@@ -168,7 +168,7 @@ PatientCity:
 
 PatientState: 
      llx: 282.225
-     lly: 484.99
+     lly: 484.554
      urx: 376.305
      ury: 497.557
    width: 94.08
@@ -177,7 +177,7 @@ PatientState:
 
 PatientCountry: 
      llx: 418.137
-     lly: 485.747
+     lly: 484.554
      urx: 512.217
      ury: 498.314
    width: 94.08
@@ -186,7 +186,7 @@ PatientCountry:
 
 PatientBirthCity: 
      llx: 86.2972
-     lly: 434.809
+     lly: 435.809
      urx: 278.997
      ury: 447.201
    width: 192.6998
@@ -195,7 +195,7 @@ PatientBirthCity:
 
 PatientBirthState: 
      llx: 342.966
-     lly: 434.198
+     lly: 435.809
      urx: 424.479
      ury: 446.765
    width: 81.513
@@ -203,8 +203,8 @@ PatientBirthState:
 
 
 PatientBirthCountry: 
-     llx: 484.115
-     lly: 434.954
+     llx: 487.115
+     lly: 435.809
      urx: 578.195
      ury: 447.521
    width: 94.08
@@ -231,7 +231,7 @@ PatientCivilStatus:
 
 FirstConsultYes: 
      llx: 163.585
-     lly: 367.578
+     lly: 366.578
      urx: 174.16
      ury: 377.28
    width: 10.575
@@ -240,7 +240,7 @@ FirstConsultYes:
 
 FirstConsultNo: 
      llx: 145.586
-     lly: 367.694
+     lly: 366.578
      urx: 156.16
      ury: 377.396
    width: 10.574
@@ -249,7 +249,7 @@ FirstConsultNo:
 
 FirstVisitYes: 
      llx: 312.986
-     lly: 367.418
+     lly: 366.578
      urx: 323.56
      ury: 377.12
    width: 10.574
@@ -258,7 +258,7 @@ FirstVisitYes:
 
 FirstVisitNo: 
      llx: 294.986
-     lly: 367.534
+     lly: 366.578
      urx: 305.56
      ury: 377.236
    width: 10.574
@@ -267,7 +267,7 @@ FirstVisitNo:
 
 ChildrenYes: 
      llx: 448.986
-     lly: 367.345
+     lly: 366.578
      urx: 459.56
      ury: 377.047
    width: 10.574
@@ -276,7 +276,7 @@ ChildrenYes:
 
 ChildrenNo: 
      llx: 430.986
-     lly: 367.461
+     lly: 366.578
      urx: 441.561
      ury: 377.163
    width: 10.575
@@ -294,7 +294,7 @@ ChildrenAmount:
 
 DrugStore: 
      llx: 142.857
-     lly: 333.987
+     lly: 330.8
      urx: 151.25
      ury: 341.07
    width: 8.393
@@ -303,7 +303,7 @@ DrugStore:
 
 Family: 
      llx: 228.058
-     lly: 333.876
+     lly: 330.8
      urx: 236.451
      ury: 340.96
    width: 8.393
@@ -312,7 +312,7 @@ Family:
 
 Friend: 
      llx: 312.058
-     lly: 333.876
+     lly: 330.8
      urx: 320.451
      ury: 340.96
    width: 8.393
@@ -321,7 +321,7 @@ Friend:
 
 Nobody: 
      llx: 387.695
-     lly: 333.73
+     lly: 330.8
      urx: 396.088
      ury: 340.814
    width: 8.393
@@ -329,8 +329,8 @@ Nobody:
 
 
 Sign: 
-     llx: 470.895
-     lly: 333.876
+     llx: 469.895
+     lly: 330.8
      urx: 479.288
      ury: 340.96
    width: 8.393
@@ -339,7 +339,7 @@ Sign:
 
 Other: 
      llx: 539.695
-     lly: 334.021
+     lly: 330.8
      urx: 548.088
      ury: 341.105
    width: 8.3929999999999
@@ -348,7 +348,7 @@ Other:
 
 ReferrerName: 
      llx: 35.5851
-     lly: 274.712
+     lly: 276.712
      urx: 574.669
      ury: 287.105
    width: 539.0839
@@ -375,7 +375,7 @@ ContactEmail:
 
 ContactPhoneArea: 
      llx: 439.272
-     lly: 214.751
+     lly: 214.544
      urx: 466.326
      ury: 227.842
    width: 27.054
@@ -393,7 +393,7 @@ ContactPhone:
 
 InsurancePhoneArea: 
      llx: 407.708
-     lly: 80.4962
+     lly: 81.7762
      urx: 434.762
      ury: 93.5872
    width: 27.054
@@ -411,7 +411,7 @@ InsurancePhone:
 
 WorkPhoneArea: 
      llx: 406.326
-     lly: 42.3873
+     lly: 43.6674
      urx: 433.38
      ury: 55.4783
    width: 27.054
@@ -446,8 +446,8 @@ SSN:
 
 
 Spouse: 
-     llx: 351.331
-     lly: 138.603
+     llx: 350.331
+     lly: 136.03
      urx: 359.724
      ury: 145.687
    width: 8.393
@@ -455,7 +455,7 @@ Spouse:
 
 
 Son: 
-     llx: 351.404
+     llx: 350.331
      lly: 125.875
      urx: 359.797
      ury: 132.959
@@ -464,7 +464,7 @@ Son:
 
 
 Myself: 
-     llx: 351.695
+     llx: 350.331
      lly: 113.585
      urx: 360.088
      ury: 120.669
@@ -536,10 +536,10 @@ WorkName:
             $fieldEntities[] = Field::fieldFromArray($field);
         }
 
-        $path = 'app/pdf/temp/newFirstTimePatientForm.pdf';
+        $path = 'app/pdf/temp/newFirstTimePatientForm0.pdf';
         Storage::put($path, '');
         $newForm = storage_path($path);
-        $pdfGenerator = new PDFGenerator($fieldEntities, $data, 'P', 'pt', 'A4');
+        $pdfGenerator = new PDFGenerator($fieldEntities, $data, 'P', 'pt', 'letter');
 
         try {
             $pdfGenerator->start($form, $newForm);
@@ -550,324 +550,324 @@ WorkName:
 
     private function getPatientData()
     {
-        $age = $this->patient->created_at->diffInYears(${$this}->patient->birth_date);
+        $age = $this->patient->created_at->diffInYears($this->patient->birth_date);
         $this->patient_data = [
             'PatientFullName' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->full_name,
             ],
             'DateMonth' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->created_at->format('m'),
             ],
             'DateDay' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->created_at->format('d'),
             ],
             'DateYear' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->created_at->format('y'),
             ],
             'DateTime' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->created_at->toTimeString(),
             ],
             'BirthMonth' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->birth_date->format('m'),
             ],
             'BirthDay' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->birth_date->format('d'),
             ],
             'BirthYear' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->birth_date->format('y'),
             ],
             'Age' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $age,
             ],
             'Sex' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->gender(),
             ],
             'PatientEmail' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->email,
             ],
             'PatientPhoneArea' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
-                'value' => substr($this->patient->phone_number, 0, strpos($this->patient->phone_number, ' ')),
+                'style' => '',
+                'value' => substr($this->patient->phone_number, 0, 3),
             ],
             'PatientPhone' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => substr($this->patient->phone_number, 4, 7),
             ],
             'PatientStreet' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->street,
             ],
             'PatientStreetNumber' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->streer_number,
             ],
             'PatientZIP' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->zip_code,
             ],
             'PatientCity' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->city,
             ],
             'PatientState' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->state,
             ],
             'PatientCountry' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->country,
             ],
             'PatientBirthCity' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->birth_city,
             ],
             'PatientBirthState' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->birth_state,
             ],
             'PatientBirthCountry' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->birth_country,
             ],
             'PatientOccupation' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->occupation(),
             ],
             'PatientCivilStatus' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->status(),
             ],
             'FirstConsultYes' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (1 == $this->patient->firstTimePatientForm->first_consult) ? 'X' : '',
             ],
             'FirstConsultNo' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (0 == $this->patient->firstTimePatientForm->first_consult) ? 'X' : '',
             ],
             'FirstVisitYes' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (1 == $this->patient->firstTimePatientForm->first_visit) ? 'X' : '',
             ],
             'FirstVisitNo' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (0 == $this->patient->firstTimePatientForm->first_visit) ? 'X' : '',
             ],
             'ChildrenYes' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (0 < $this->patient->firstTimePatientForm->children) ? 'X' : '',
             ],
             'ChildrenNo' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (0 == $this->patient->firstTimePatientForm->children) ? 'X' : '',
             ],
             'ChildrenAmount' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->children,
             ],
             'DrugStore' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (0 == $this->patient->firstTimePatientForm->referral) ? 'X' : '',
             ],
             'Family' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (1 == $this->patient->firstTimePatientForm->referral) ? 'X' : '',
             ],
             'Friend' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (2 == $this->patient->firstTimePatientForm->referral) ? 'X' : '',
             ],
             'Nobody' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (3 == $this->patient->firstTimePatientForm->referral) ? 'X' : '',
             ],
             'Sign' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (4 == $this->patient->firstTimePatientForm->referral) ? 'X' : '',
             ],
             'Other' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (5 == $this->patient->firstTimePatientForm->referral) ? 'X' : '',
             ],
             'ReferrerName' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->referrer_name ?? '',
             ],
             'ContactName' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->contact_name ?? '',
             ],
             'ContactEmail' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->contact_email ?? '',
             ],
             'ContactPhoneArea' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
-                'value' => substr($this->patient->firstTimePatientForm->contact_phone_number, 0, strpos($this->patient->firstTimePatientForm->contact_phone_number, ' ')),
+                'style' => '',
+                'value' => substr($this->patient->firstTimePatientForm->contact_phone_number, 0, 3),
             ],
             'ContactPhone' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => substr($this->patient->firstTimePatientForm->contact_phone_number, 4, 7),
             ],
             'InsurancePhoneArea' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
-                'value' => substr($this->patient->firstTimePatientForm->insurer_phone_number, 0, strpos($this->patient->firstTimePatientForm->insurer_phone_number, ' ')),
+                'style' => '',
+                'value' => substr($this->patient->firstTimePatientForm->insurer_phone_number, 0, 3),
             ],
             'InsurancePhone' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => substr($this->patient->firstTimePatientForm->insurer_phone_number, 4, 7),
             ],
             'WorkPhoneArea' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
-                'value' => substr($this->patient->firstTimePatientForm->work_phone_number, 0, strpos($this->patient->firstTimePatientForm->work_phone_number, ' ')),
+                'style' => '',
+                'value' => substr($this->patient->firstTimePatientForm->work_phone_number, 0, 3),
             ],
             'WorkPhone' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => substr($this->patient->firstTimePatientForm->work_phone_number, 4, 7),
             ],
             'InsuredName' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->insured_name,
             ],
             'SSN' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->insured_ssn,
             ],
             'Spouse' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (2 == $this->patient->firstTimePatientForm->insured_relationship) ? 'X' : '',
             ],
             'Son' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (1 == $this->patient->firstTimePatientForm->insured_relationship) ? 'X' : '',
             ],
             'Myself' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => (3 == $this->patient->firstTimePatientForm->insured_relationship) ? 'X' : '',
             ],
             'InsuranceName' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->insured_name,
             ],
             'WorkName' => [
                 'size' => 9,
                 'family' => 'Arial',
-                'style' => 'B',
+                'style' => '',
                 'value' => $this->patient->firstTimePatientForm->insured_ssn,
             ],
         ];
