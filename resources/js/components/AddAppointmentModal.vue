@@ -394,15 +394,14 @@ export default {
     },
     search: _.debounce((loading, search, vm) => {
       axios
-        .get("/patients/filter", { params: { name: search } })
+        .get("/patients/search", { params: { name: search } })
         .then((response) => {
-          console.log("PATIENTS", response.data);
           vm.patients = response.data.data;
-          console.log(vm.patients);
           loading(false);
         })
         .catch((error) => {
           console.log(error);
+           loading(false);
         });
     }, 350),
 

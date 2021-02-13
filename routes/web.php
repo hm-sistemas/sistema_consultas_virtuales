@@ -24,9 +24,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/appointments/{appointment}', 'AppointmentController@destroy')->name('appointments.destroy');
 
     Route::get('/doctors', 'DoctorController@doctors')->name('doctors');
+    Route::get('/patients/search', 'PatientController@filter')->name('patients.filter');
 
     Route::resource('patients', 'PatientController');
-    Route::get('/patients/filter', 'PatientController@filter')->name('patients.filter');
+
     Route::post('patients/{patient}/firstTimeForm', 'FirstTimePatientFormController@fillForm')->name('patient.firstTimeForm');
 });
 

@@ -31,8 +31,8 @@ class PatientController extends Controller
     public function filter(Request $request)
     {
         $search = $request->name;
-        $patients = Patient::whereLike(['full_name'], $search)
-            ->get()
+        $patients = Patient::query()->whereLike(['full_name'], $search)
+            ->get()->take(15)
         ;
 
         return (PatientResource::collection($patients))->additional([
