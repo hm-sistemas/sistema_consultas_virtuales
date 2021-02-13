@@ -88,6 +88,11 @@ class FirstTimePatientForm extends Model
 
                 break;
 
+            case 4:
+                return 'NA';
+
+                break;
+
             default:
                 // code...
                 break;
