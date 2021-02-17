@@ -531,7 +531,7 @@
                               type="text"
                               name="contact_phone_number"
                               id="contact_phone_number"
-                              placeholder="Teléfono de contacto de emergencia"
+                              placeholder="Teléfono de contacto de emergencia, solo numeros"
                               v-model="patient.contact_phone_number"
                               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -649,7 +649,7 @@
                               type="text"
                               name="insurer_phone_number"
                               id="insurer_phone_number"
-                              placeholder="Teléfono de aseguranza"
+                              placeholder="Teléfono de aseguranza, solo numeros"
                               v-model="patient.insurer_phone_number"
                               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -679,7 +679,7 @@
                               type="text"
                               name="work_phone_number"
                               id="work_phone_number"
-                              placeholder="Teléfono de compañia donde trabaja"
+                              placeholder="Teléfono de compañia donde trabaja, solo numeros"
                               v-model="patient.work_phone_number"
                               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                             />
@@ -750,7 +750,7 @@ export default {
       contact_phone_number: "",
       insured_name: "",
       insured_ssn: "",
-      insured_relationship: 2,
+      insured_relationship: 4,
       insurer_name: "",
       insurer_phone_number: "",
       work_name: "",

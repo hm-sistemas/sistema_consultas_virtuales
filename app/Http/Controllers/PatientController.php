@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Patient\PatientRequest;
+use App\Http\Requests\Patient\UpdatePatientRequest;
 use App\Http\Resources\Patient\PatientResource;
 use App\Models\FirstTimePatientForm;
 use App\Models\Patient;
@@ -93,6 +94,7 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
+        return view('patients.edit', compact('patient'));
     }
 
     /**
@@ -100,8 +102,23 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
+        $validated = $request->validated();
+        $patient->full_name = $validated['name'].' '.$validated['last_name'];
+        $patient->fill(($validated));
+        $patient->save();
+
+        $validated['arrival_time'] = Carbon::createFromFormat('Y-m-d H:i', $validated['date'].' '.$validated['arrival_time']);
+
+        $validated['first_consult'] = $request->has('first_consult');
+        $validated['first_visit'] = $request->has('first_visit');
+        $validated['insured'] = $request->has('insured');
+
+        $patient->firstTimePatientForm->fill(($validated));
+        $patient->firstTimePatientForm->save();
+
+        return redirect()->route('patients.show', $patient)->withStatus(__('Paciente actualizado.'));
     }
 
     /**
